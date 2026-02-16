@@ -1,0 +1,438 @@
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Variables ── */
+:root {
+  --accent2:   #ff3c78;
+  --bg:        #0d0d0d;
+  --chrome:    #c0c0c0;
+  --chrome-dk: #808080;
+  --titlebar:  #000c7a;
+  --font-px:   'Press Start 2P', monospace;
+  --font-vt:   'VT323', monospace;
+}
+
+/* ── Base ── */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg);
+  background-image: url('media/Background.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-family: var(--font-vt);
+  font-size: 18px;
+  user-select: none;
+  cursor: default;
+}
+
+/* ── CRT Scanlines ── */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.13) 2px,
+    rgba(0,0,0,0.13) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── Top Ticker ── */
+.ticker-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 36px;
+  background: #cc1111;
+  color: #fff;
+  font-family: var(--font-vt);
+  font-size: 24px;
+  line-height: 36px;
+  z-index: 500;
+  border-bottom: 2px solid #000;
+}
+.ticker-bar marquee { line-height: 36px; }
+
+
+/* ── Desktop (icon area) ── */
+.desktop {
+  position: fixed;
+  top: 26px;
+  bottom: 36px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+/* ── Icons ── */
+.icon {
+  position: absolute;
+  width: 204px;
+  text-align: center;
+  padding: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  z-index: 20;
+}
+.icon:hover  { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.2); }
+.icon.active { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.4); }
+
+.icon-gfx {
+  width: 180px;
+  height: 180px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 6px;
+  font-size: 5.85rem;
+  color: #fff;
+}
+.icon:hover .icon-gfx {
+  background: transparent;
+}
+.icon-gfx img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.icon-label {
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  font-size: 1.98rem;
+  color: #fff;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  letter-spacing: 0.04em;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+/* ── Windows ── */
+.window {
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  width: 380px;
+  max-width: 92vw;
+  max-height: 80vh;
+  background: var(--chrome);
+  border-top:    2px solid #fff;
+  border-left:   2px solid #fff;
+  border-right:  2px solid var(--chrome-dk);
+  border-bottom: 2px solid var(--chrome-dk);
+  box-shadow: 4px 4px 0 #000;
+  color: #000;
+  font-family: var(--font-vt);
+  z-index: 200;
+}
+
+.window-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, var(--titlebar), #0050c8);
+  color: #fff;
+  padding: 5px 6px;
+  font-family: var(--font-vt);
+  font-size: 1.05rem;
+  cursor: grab;
+  flex-shrink: 0;
+  gap: 6px;
+}
+.window-titlebar:active { cursor: grabbing; }
+.window-titlebar span { flex: 1; overflow: hidden; white-space: nowrap; }
+
+.win-close {
+  width: 20px;
+  height: 18px;
+  flex-shrink: 0;
+  background: var(--chrome);
+  border-top:    2px solid #fff;
+  border-left:   2px solid #fff;
+  border-right:  2px solid var(--chrome-dk);
+  border-bottom: 2px solid var(--chrome-dk);
+  color: #000;
+  font-size: 0.65rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-vt);
+  padding: 0;
+  line-height: 1;
+}
+.win-close:active {
+  border-top:    2px solid var(--chrome-dk);
+  border-left:   2px solid var(--chrome-dk);
+  border-right:  2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.window-body {
+  padding: 12px;
+  overflow-y: auto;
+  flex: 1;
+  background: var(--chrome);
+  font-size: 1rem;
+}
+
+.win-section {
+  font-family: var(--font-vt);
+  font-size: 1.05rem;
+  color: var(--titlebar);
+  border-bottom: 1px solid var(--chrome-dk);
+  padding-bottom: 3px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  letter-spacing: 0.04em;
+}
+.win-section:first-child { margin-top: 0; }
+
+/* Track list */
+.track-list { margin-bottom: 12px; }
+.track {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 1.05rem;
+  border-bottom: 1px dotted #999;
+}
+.track-year { color: #666; font-size: 0.95rem; }
+
+.win-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.btn-link {
+  display: inline-block;
+  background: var(--titlebar);
+  color: #fff;
+  padding: 4px 10px;
+  text-decoration: none;
+  font-family: var(--font-vt);
+  font-size: 1rem;
+  border-top:    2px solid #4455bb;
+  border-left:   2px solid #4455bb;
+  border-right:  2px solid #000050;
+  border-bottom: 2px solid #000050;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.btn-link:hover  { background: #0000b0; }
+.btn-link:active {
+  border-top:    2px solid #000050;
+  border-left:   2px solid #000050;
+  border-right:  2px solid #4455bb;
+  border-bottom: 2px solid #4455bb;
+}
+
+/* Bio */
+.bio-text {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #111;
+  margin-bottom: 12px;
+  font-family: var(--font-vt);
+}
+.highlight-text {
+  color: var(--titlebar);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  font-family: var(--font-vt);
+}
+
+/* Photo grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.photo-ph {
+  background: #888;
+  border-top:    2px solid #aaa;
+  border-left:   2px solid #aaa;
+  border-right:  2px solid #444;
+  border-bottom: 2px solid #444;
+  padding: 28px 8px;
+  text-align: center;
+  color: #ddd;
+  font-size: 0.85rem;
+}
+
+/* Contact */
+.contact-list {
+  margin-bottom: 14px;
+  line-height: 1.9;
+  font-size: 1rem;
+}
+.contact-list a {
+  color: var(--titlebar);
+  text-decoration: none;
+  font-family: var(--font-vt);
+}
+.contact-list a:hover { text-decoration: underline; }
+
+/* Blinking text */
+.blink-text {
+  font-size: 0.9rem;
+  color: #555;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Scrollbar */
+.window-body::-webkit-scrollbar { width: 16px; }
+.window-body::-webkit-scrollbar-track {
+  background: #d4d0c8;
+  border-left: 1px solid var(--chrome-dk);
+}
+.window-body::-webkit-scrollbar-thumb {
+  background: var(--chrome);
+  border-top:    2px solid #fff;
+  border-left:   2px solid #fff;
+  border-right:  2px solid var(--chrome-dk);
+  border-bottom: 2px solid var(--chrome-dk);
+}
+
+/* ── Taskbar ── */
+.taskbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 36px;
+  background: var(--chrome);
+  border-top: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  gap: 4px;
+  z-index: 8000;
+}
+
+.taskbar-start {
+  background: var(--chrome);
+  border-top:    2px solid #fff;
+  border-left:   2px solid #fff;
+  border-right:  2px solid var(--chrome-dk);
+  border-bottom: 2px solid var(--chrome-dk);
+  padding: 4px 10px;
+  font-family: var(--font-px);
+  font-size: 0.52rem;
+  color: #000;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.taskbar-start:hover  { background: #d4d0c8; }
+.taskbar-start:active {
+  border-top:    2px solid var(--chrome-dk);
+  border-left:   2px solid var(--chrome-dk);
+  border-right:  2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.taskbar-wins {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.taskbar-btn {
+  background: #b8b4b0;
+  border-top:    2px solid var(--chrome-dk);
+  border-left:   2px solid var(--chrome-dk);
+  border-right:  2px solid #fff;
+  border-bottom: 2px solid #fff;
+  padding: 2px 10px;
+  font-family: var(--font-vt);
+  font-size: 0.95rem;
+  color: #000;
+  cursor: pointer;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.taskbar-btn:hover { background: #c8c4c0; }
+
+.taskbar-clock {
+  background: var(--chrome);
+  border-top:    2px solid var(--chrome-dk);
+  border-left:   2px solid var(--chrome-dk);
+  border-right:  2px solid #fff;
+  border-bottom: 2px solid #fff;
+  padding: 4px 8px;
+  font-family: var(--font-vt);
+  font-size: 1rem;
+  color: #000;
+  min-width: 52px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ── Sticky note ── */
+.sticky {
+  position: absolute;
+  background: #ffffa8;
+  color: #222;
+  padding: 8px 10px 10px;
+  font-family: var(--font-vt);
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid #d4d060;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+  max-width: 120px;
+  pointer-events: none;
+  z-index: 15;
+}
+.sticky-sig {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  color: #666;
+}
+
+/* ── Now playing ── */
+.now-playing {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  font-family: var(--font-vt);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.4);
+  pointer-events: none;
+  z-index: 15;
+  animation: blink-slow 2.8s step-end infinite;
+}
+@keyframes blink-slow { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+/* ── Visitor counter ── */
+.visitor-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-family: var(--font-vt);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.2);
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* ── Mobile: fill screen with left side of image ── */
+@media (max-width: 768px) {
+  html, body {
+    background-position: left center;
+  }
+}
