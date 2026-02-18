@@ -194,7 +194,7 @@ if (mlForm) {
     const name  = mlForm.querySelector('[name="name"]').value;
 
     try {
-      const res = await fetch('http://155.138.196.203:9000/api/public/subscription', {
+      const res = await fetch('https://listmonk.watchforturtles.ca/api/public/subscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
