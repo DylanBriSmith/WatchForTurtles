@@ -521,4 +521,14 @@ html, body {
   .sticky { display: none; }
   .now-playing { display: none; }
 
+  /* Photo grid: single column */
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Bottom ticker: reduce oversized font */
+  .bottom-ticker {
+    font-size: 1.4rem;
+  }
+
 }
