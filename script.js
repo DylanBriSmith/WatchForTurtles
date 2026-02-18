@@ -115,15 +115,16 @@ function openWindow(id) {
     if (!win.dataset.positioned) {
       win.dataset.positioned = '1';
       const offset = [...document.querySelectorAll('.window')].indexOf(win) * 22;
-      const w = 380;
-      const h = 320;
+      const w = win.offsetWidth  || 380;
+      const h = win.offsetHeight || 320;
       win.style.left = Math.max(0, Math.round((window.innerWidth  - w) / 2) + offset) + 'px';
       win.style.top  = Math.max(26, Math.round((window.innerHeight - h) / 2) + offset) + 'px';
     }
   }
 
-  win.style.display = 'flex';
-  win.style.zIndex  = ++zTop;
+  win.style.visibility   = 'visible';
+  win.style.pointerEvents = 'auto';
+  win.style.zIndex       = ++zTop;
 
   addTaskbarBtn(id);
 }
@@ -131,7 +132,8 @@ function openWindow(id) {
 function closeWindow(id) {
   const win = document.getElementById(id);
   if (!win) return;
-  win.style.display = 'none';
+  win.style.visibility   = 'hidden';
+  win.style.pointerEvents = 'none';
   removeTaskbarBtn(id);
 }
 
@@ -161,8 +163,9 @@ function addTaskbarBtn(id) {
   btn.addEventListener('click', () => {
     const win = document.getElementById(id);
     if (!win) return;
-    win.style.display = 'flex';
-    win.style.zIndex  = ++zTop;
+    win.style.visibility   = 'visible';
+    win.style.pointerEvents = 'auto';
+    win.style.zIndex       = ++zTop;
   });
   container.appendChild(btn);
 }
