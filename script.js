@@ -106,9 +106,6 @@ function openWindow(id) {
   const win = document.getElementById(id);
   if (!win) return;
 
-  win.style.display = 'flex';
-  win.style.zIndex  = ++zTop;
-
   if (window.innerWidth > 768) {
     if (!win.dataset.dragReady) {
       win.dataset.dragReady = '1';
@@ -118,14 +115,15 @@ function openWindow(id) {
     if (!win.dataset.positioned) {
       win.dataset.positioned = '1';
       const offset = [...document.querySelectorAll('.window')].indexOf(win) * 22;
-      setTimeout(() => {
-        const w = win.offsetWidth  || 380;
-        const h = win.offsetHeight || 320;
-        win.style.left = Math.max(0, Math.round((window.innerWidth  - w) / 2) + offset) + 'px';
-        win.style.top  = Math.max(26, Math.round((window.innerHeight - h) / 2) + offset) + 'px';
-      }, 0);
+      const w = 380;
+      const h = 320;
+      win.style.left = Math.max(0, Math.round((window.innerWidth  - w) / 2) + offset) + 'px';
+      win.style.top  = Math.max(26, Math.round((window.innerHeight - h) / 2) + offset) + 'px';
     }
   }
+
+  win.style.display = 'flex';
+  win.style.zIndex  = ++zTop;
 
   addTaskbarBtn(id);
 }
