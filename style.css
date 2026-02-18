@@ -430,6 +430,94 @@ html, body {
   z-index: 15;
 }
 
+/* ── Photo grid images ── */
+.photo-grid img {
+  width: 100%;
+  display: block;
+  border-top:    2px solid #aaa;
+  border-left:   2px solid #aaa;
+  border-right:  2px solid #444;
+  border-bottom: 2px solid #444;
+  cursor: pointer;
+}
+.photo-grid img:hover {
+  border-top:    2px solid #444;
+  border-left:   2px solid #444;
+  border-right:  2px solid #aaa;
+  border-bottom: 2px solid #aaa;
+}
+
+/* ── Lightbox ── */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-top:    2px solid #aaa;
+  border-left:   2px solid #aaa;
+  border-right:  2px solid #444;
+  border-bottom: 2px solid #444;
+}
+
+/* ── Mailing list form (in window) ── */
+.ml-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ml-form input[type="email"],
+.ml-form input[type="text"] {
+  background: #000;
+  color: var(--pink);
+  border-top:    2px solid #444;
+  border-left:   2px solid #444;
+  border-right:  2px solid #aaa;
+  border-bottom: 2px solid #aaa;
+  padding: 4px 6px;
+  font-family: var(--font-vt);
+  font-size: 1.1rem;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.ml-form input[type="email"]::placeholder,
+.ml-form input[type="text"]::placeholder { color: rgba(255,60,120,0.4); }
+.ml-form input[type="submit"] {
+  background: var(--chrome);
+  color: #000;
+  border-top:    2px solid #fff;
+  border-left:   2px solid #fff;
+  border-right:  2px solid #444;
+  border-bottom: 2px solid #444;
+  padding: 4px 10px;
+  font-family: var(--font-vt);
+  font-size: 1.1rem;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.ml-form input[type="submit"]:active {
+  border-top:    2px solid #444;
+  border-left:   2px solid #444;
+  border-right:  2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+.ml-msg {
+  font-family: var(--font-vt);
+  font-size: 1.1rem;
+  color: var(--pink);
+}
+.ml-err { color: #ff6b6b; }
+
 /* ── Mobile: fill screen with left side of image ── */
 @media (max-width: 768px) {
   html, body {
