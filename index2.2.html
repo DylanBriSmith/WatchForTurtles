@@ -23,19 +23,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="style2.2.css">
 </head>
 <body>
 
   <div class="scanlines" aria-hidden="true"></div>
   <div class="bg-overlay" aria-hidden="true"></div>
 
-  <!-- ── Ticker ── -->
-  <!-- <div class="ticker-bar">
-    <marquee scrollamount="4">★Join our fuck ass mailing list★Join our fuck ass mailing list★Join our fuck ass mailing list★Join our fuck ass mailing list★Join our fuck ass mailing list★ </marquee>
-  </div> -->
 
-  <!-- ── Peach Pit-style header ── -->
+
+  <!-- header -->
   <header class="pp-header">
     <h1 class="band-name">Watch for Turtles</h1>
     <p class="tagline">post-punk</p>
@@ -49,49 +46,14 @@
     <div class="pp-rule">✦ ✦ ✦</div>
   </header>
 
-  <!-- ── Desktop (draggable icons live here) ── -->
-  <main class="desktop" id="desktop">
-
-    <!-- <div class="icon" data-window="music" style="left:52px;top:60px">
-      <div class="icon-gfx"><img src="media/logos/music2.gif" alt="music"></div>
-      <div class="icon-label">MUSIC</div>
-    </div>
-
-    <div class="icon" data-window="bio" style="left:52px;top:240px">
-      <div class="icon-gfx"><img src="media/logos/notebook.gif" alt="bio"></div>
-      <div class="icon-label">BIO</div>
-    </div>
-
-    <div class="icon" data-window="photos" style="left:300px;top:60px">
-      <div class="icon-gfx"><i class="fa-solid fa-camera"></i></div>
-      <div class="icon-label">photos</div>
-    </div>
-
-    <div class="icon" data-window="contact" style="left:300px;top:240px">
-      <div class="icon-gfx"><img src="media/logos/mail.gif" alt="contact"></div>
-      <div class="icon-label">contact</div>
-    </div>
-
-    <div class="icon" data-href="#" style="left:560px;top:60px">
-      <div class="icon-gfx"><i class="fa-brands fa-instagram"></i></div>
-      <div class="icon-label">INSTAGRAM</div>
-    </div>
-
-    <div class="icon" data-href="#" style="left:560px;top:240px">
-      <div class="icon-gfx"><i class="fa-brands fa-tiktok"></i></div>
-      <div class="icon-label">TIKTOK</div>
-    </div> -->
-
+  
     <!-- sticky note -->
     <div class="sticky" style="right:44px;top:20px;transform:rotate(2.8deg)">
       We have no fucking music out<br>yet<br><span class="sticky-sig">-Dylan</span>
     </div>
-
-    <!-- <div class="now-playing">♪ shell shock — wft</div> -->
-
   </main>
 
-  <!-- ── WINDOWS ── -->
+  <!-- WINDOWS -->
 
   <div class="window" id="window-music">
     <div class="window-titlebar">
@@ -101,10 +63,6 @@
     <div class="window-body">
       <p class="win-section">// releases</p>
       <div class="track-list">
-        <!-- <div class="track"><span>► SHELL SHOCK</span><span class="track-year">2026</span></div>
-        <div class="track"><span>► concrete garden</span><span class="track-year">2025</span></div>
-        <div class="track"><span>► NOISE COMPLAINT</span><span class="track-year">2025</span></div>
-        <div class="track"><span>► hollow frequencies</span><span class="track-year">2024</span></div> -->
         <div class="track"><span>► we have fucking nothing out atm</span><span class="track-year">2026</span></div>
       </div>
       <p class="win-section">// stream / download</p>
@@ -158,12 +116,7 @@
       <div class="contact-list">
         <p>booking // general — <a href="mailto:band@watchforturtles.com">band@watchforturtles.ca</a></p>
       </div>
-      <!-- <p class="win-section">// socials</p>
-      <div class="win-links">
-        <a href="#" class="btn-link">INSTAGRAM</a>
-        <a href="#" class="btn-link">TIKTOK</a>
-        <a href="#" class="btn-link">facebook</a>
-      </div> -->
+      
     </div>
   </div>
 
@@ -190,5 +143,7 @@
 
   <script src="script.js"></script>
   <script src="effects.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
 </body>
 </html>

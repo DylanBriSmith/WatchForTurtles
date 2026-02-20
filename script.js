@@ -95,11 +95,14 @@ icons.forEach(icon => {
   });
 });
 
-document.getElementById('desktop').addEventListener('click', e => {
-  if (!e.target.closest('.icon')) {
-    icons.forEach(i => i.classList.remove('active'));
-  }
-});
+const desktop = document.getElementById('desktop');
+if (desktop) {
+  desktop.addEventListener('click', e => {
+    if (!e.target.closest('.icon')) {
+      icons.forEach(i => i.classList.remove('active'));
+    }
+  });
+}
 
 // ── Window management ──
 function openWindow(id) {
