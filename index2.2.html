@@ -39,6 +39,7 @@
     <nav class="pp-nav">
       <button class="pp-btn" onclick="openWindow('window-music')">Music</button>
       <button class="pp-btn" onclick="openWindow('window-photos')">Photos</button>
+      <button class="pp-btn" onclick="openWindow('window-shows')">Shows</button>
       <button class="pp-btn" onclick="openWindow('window-contact')">Contact</button>
       <a class="pp-btn" href="https://www.instagram.com/watchforturtles/" target="_blank">Instagram</a>
       <a class="pp-btn" href="#" target="_blank">TikTok</a>
@@ -54,6 +55,17 @@
   </main>
 
   <!-- WINDOWS -->
+
+  <div class="window" id="window-shows">
+    <div class="window-titlebar">
+      <span>shows.exe</span>
+      <button class="win-close" data-target="window-shows">✕</button>
+    </div>
+    <div class="window-body">
+      <p class="win-section">// upcoming shows</p>
+      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DVWhe-5j93g/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;width:calc(100% - 2px);"></blockquote>
+    </div>
+  </div>
 
   <div class="window" id="window-music">
     <div class="window-titlebar">
@@ -141,6 +153,7 @@
 
   <div class="corner-clock" id="clock">00:00</div>
 
+  <script async src="https://www.instagram.com/embed.js"></script>
   <script src="script.js"></script>
   <script src="effects.js"></script>
   <!-- GSAP -->

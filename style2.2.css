@@ -210,7 +210,7 @@ html, body {
   pointer-events: none;
   flex-direction: column;
   width: 380px;
-  max-width: 92vw;
+  max-width: 88vw;
   max-height: 80vh;
   background: #c0c0c0;
   border: 2px solid;
@@ -534,13 +534,19 @@ html, body {
   }
 
 
-  /* Windows: full screen, no drag chrome */
+  /* Windows: centered card, not full screen */
   .window {
     position: fixed !important;
-    inset: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
+    inset: auto !important;
+    top: 12vh !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    transform: none !important;
+    width: 88vw !important;
+    max-width: 400px !important;
+    max-height: 75vh !important;
     border: 1px solid var(--primary) !important;
     box-shadow: none !important;
   }
@@ -551,6 +557,14 @@ html, body {
   .win-close {
     font-size: 1.1rem;
     padding: 4px 12px;
+  }
+
+  #window-shows {
+    max-height: none !important;
+  }
+  #window-shows .window-body {
+    overflow: hidden !important;
+    padding: 8px !important;
   }
 
   /* Mailing list: stack vertically */

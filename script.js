@@ -15,6 +15,25 @@ window.addEventListener('DOMContentLoaded', () => {
     icon.style.top  = Math.round(minY + Math.random() * (maxY - minY)) + 'px';
   });
 
+  if (document.getElementById('window-shows')) {
+    const showsWin = document.getElementById('window-shows');
+    const observer = new MutationObserver(() => {
+      const iframe = showsWin.querySelector('iframe');
+      if (iframe) {
+        observer.disconnect();
+        iframe.addEventListener('load', () => {
+          openWindow('window-shows');
+          if (window.innerWidth > 768) {
+            const win = document.getElementById('window-shows');
+            win.style.top  = Math.max(26, parseInt(win.style.top)  - 220) + 'px';
+            win.style.left = Math.max(0,  parseInt(win.style.left) - 500) + 'px';
+          }
+        });
+      }
+    });
+    observer.observe(showsWin, { childList: true, subtree: true });
+  }
+
 });
 
 // ── Generic drag (mouse + touch) ──
