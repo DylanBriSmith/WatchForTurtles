@@ -16,9 +16,12 @@
 ```
 /home/drdp/bandsite/
 ├── index.html           # Primary Windows 95-style interface
-├── index2.html          # Alternative "Peach Pit"-style interface
-├── script.js            # Core interaction logic (drag, windows, clock)
-├── effects.js           # Visual effects (turtle animation, cursor trails)
+├── index2.html          # Main "Peach Pit" interface (production)
+├── PEACH_PIT.md         # Peach Pit architecture, JS contracts, Next.js migration notes
+├── script.js            # Core interaction logic (drag, windows, clock); shared by index + index2
+├── gsap-peachpit.js     # GSAP animations (Peach Pit only; requires body.theme-peachpit)
+├── instagram-config.js  # Featured Instagram post URL for index2 embed
+├── effects.js           # Visual effects (turtle animation, cursor trails); skipped on Peach Pit
 ├── style.css            # Theme for index.html (Windows 95)
 ├── style2.css           # Theme for index2.html (Peach Pit)
 ├── media/
@@ -41,6 +44,7 @@
 - **HTML5** — vanilla, no templating
 - **CSS3** — no preprocessors, custom properties (variables)
 - **JavaScript (ES6+)** — vanilla, no frameworks or build tools
+- **GSAP 3 + ScrollTrigger (CDN)** — Peach Pit page only (`gsap-peachpit.js`)
 - **Google Fonts (CDN)** — VT323, Press Start 2P
 - **Font Awesome 6.6.0 (CDN)** — icons
 

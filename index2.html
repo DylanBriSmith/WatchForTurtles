@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="peach-pit-scroll">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Post-punk. Toronto. Booking — band@watchforturtles.ca">
-  <!-- Open Graph -->
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://watchforturtles.ca/index2.html">
   <meta property="og:site_name"   content="Watch for Turtles">
@@ -12,7 +11,6 @@
   <meta property="og:description" content="Post-punk. Toronto. Booking — band@watchforturtles.ca">
   <meta property="og:image"       content="https://watchforturtles.ca/media/Background.jpeg">
   <meta property="og:image:alt"   content="Watch for Turtles">
-  <!-- Twitter / X -->
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="Watch for Turtles">
   <meta name="twitter:description" content="Post-punk. Toronto. Booking — band@watchforturtles.ca">
@@ -25,31 +23,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="style2.css">
 </head>
-<body>
+<body class="theme-peachpit">
 
   <div class="scanlines" aria-hidden="true"></div>
   <div class="bg-overlay" aria-hidden="true"></div>
 
-  <!-- ── Ticker ── -->
   <!-- <div class="ticker-bar">
     <marquee scrollamount="4">★Join our fuck ass mailing list★Join our fuck ass mailing list★Join our fuck ass mailing list★Join our fuck ass mailing list★Join our fuck ass mailing list★ </marquee>
   </div> -->
 
-  <!-- ── Peach Pit-style header ── -->
   <header class="pp-header">
     <h1 class="band-name">Watch for Turtles</h1>
     <p class="tagline">post-punk</p>
     <nav class="pp-nav">
-      <button class="pp-btn" onclick="openWindow('window-music')">Music</button>
-      <button class="pp-btn" onclick="openWindow('window-photos')">Photos</button>
-      <button class="pp-btn" onclick="openWindow('window-contact')">Contact</button>
+      <button type="button" class="pp-btn" data-open-window="window-music">Music</button>
+      <button type="button" class="pp-btn" data-open-window="window-photos">Photos</button>
+      <button type="button" class="pp-btn" data-open-window="window-contact">Contact</button>
       <a class="pp-btn" href="https://www.instagram.com/watchforturtles/" target="_blank">Instagram</a>
       <a class="pp-btn" href="#" target="_blank">TikTok</a>
     </nav>
     <div class="pp-rule">✦ ✦ ✦</div>
   </header>
 
-  <!-- ── Desktop (draggable icons live here) ── -->
   <main class="desktop" id="desktop">
 
     <!-- <div class="icon" data-window="music" style="left:52px;top:60px">
@@ -82,7 +77,6 @@
       <div class="icon-label">TIKTOK</div>
     </div> -->
 
-    <!-- sticky note -->
     <div class="sticky" style="right:44px;top:20px;transform:rotate(2.8deg)">
       We have no fucking music out<br>yet<br><span class="sticky-sig">-Dylan</span>
     </div>
@@ -90,8 +84,6 @@
     <!-- <div class="now-playing">♪ shell shock — wft</div> -->
 
   </main>
-
-  <!-- ── WINDOWS ── -->
 
   <div class="window" id="window-music">
     <div class="window-titlebar">
@@ -177,9 +169,23 @@
     </form>
   </div>
 
-  <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
     <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  </div>
+
+  <div class="first-fold-spacer" aria-hidden="true"></div>
+  <div class="ig-scroll-panel" id="ig-scroll-panel">
+    <section id="ig-latest" class="ig-section" aria-labelledby="ig-latest-title">
+      <p class="ig-section__kicker">// feed</p>
+      <h2 id="ig-latest-title" class="ig-section__title">latest on instagram</h2>
+      <div class="ig-section__frame">
+        <div id="ig-embed-root" class="ig-section__embed"></div>
+        <div id="ig-embed-fallback" class="ig-section__fallback" hidden>
+          <p>No post to show here yet.</p>
+          <a class="ig-section__link" href="https://www.instagram.com/watchforturtles/" target="_blank" rel="noopener noreferrer">@watchforturtles</a>
+        </div>
+      </div>
+    </section>
   </div>
 
   <div class="bottom-ticker">
@@ -188,7 +194,11 @@
 
   <div class="corner-clock" id="clock">00:00</div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+  <script src="instagram-config.js"></script>
   <script src="script.js"></script>
   <script src="effects.js"></script>
+  <script src="gsap-peachpit.js"></script>
 </body>
 </html>

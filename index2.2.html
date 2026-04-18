@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Post-punk. Toronto. Booking — band@watchforturtles.ca">
-  <!-- Open Graph -->
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://watchforturtles.ca/index2.html">
   <meta property="og:site_name"   content="Watch for Turtles">
@@ -12,7 +11,6 @@
   <meta property="og:description" content="Post-punk. Toronto. Booking — band@watchforturtles.ca">
   <meta property="og:image"       content="https://watchforturtles.ca/media/Background.jpeg">
   <meta property="og:image:alt"   content="Watch for Turtles">
-  <!-- Twitter / X -->
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="Watch for Turtles">
   <meta name="twitter:description" content="Post-punk. Toronto. Booking — band@watchforturtles.ca">
@@ -30,31 +28,25 @@
   <div class="scanlines" aria-hidden="true"></div>
   <div class="bg-overlay" aria-hidden="true"></div>
 
-
-
-  <!-- header -->
   <header class="pp-header">
     <h1 class="band-name">Watch for Turtles</h1>
     <p class="tagline">post-punk</p>
     <nav class="pp-nav">
-      <button class="pp-btn" onclick="openWindow('window-music')">Music</button>
-      <button class="pp-btn" onclick="openWindow('window-photos')">Photos</button>
-      <button class="pp-btn" onclick="openWindow('window-shows')">Shows</button>
-      <button class="pp-btn" onclick="openWindow('window-contact')">Contact</button>
+      <button type="button" class="pp-btn" data-open-window="window-music">Music</button>
+      <button type="button" class="pp-btn" data-open-window="window-photos">Photos</button>
+      <button type="button" class="pp-btn" data-open-window="window-shows">Shows</button>
+      <button type="button" class="pp-btn" data-open-window="window-contact">Contact</button>
       <a class="pp-btn" href="https://www.instagram.com/watchforturtles/" target="_blank">Instagram</a>
       <a class="pp-btn" href="#" target="_blank">TikTok</a>
     </nav>
     <div class="pp-rule">✦ ✦ ✦</div>
   </header>
 
-  
-    <!-- sticky note -->
+  <main class="desktop" id="desktop">
     <div class="sticky" style="right:44px;top:20px;transform:rotate(2.8deg)">
       We have no fucking music out<br>yet<br><span class="sticky-sig">-Dylan</span>
     </div>
   </main>
-
-  <!-- WINDOWS -->
 
   <div class="window" id="window-shows">
     <div class="window-titlebar">
@@ -142,7 +134,6 @@
     </form>
   </div>
 
-  <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
     <img class="lightbox-img" id="lightbox-img" src="" alt="">
   </div>
@@ -154,9 +145,9 @@
   <div class="corner-clock" id="clock">00:00</div>
 
   <script async src="https://www.instagram.com/embed.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
   <script src="script.js"></script>
   <script src="effects.js"></script>
-  <!-- GSAP -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="gsap-animations.js"></script>
 </body>
 </html>

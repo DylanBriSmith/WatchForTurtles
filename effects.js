@@ -107,9 +107,10 @@ function initCursorTrail() {
 }
 
 
-// ── Init ──
+// ── Init (Peach Pit theme uses GSAP only — skip decorative effects) ──
 window.addEventListener('DOMContentLoaded', () => {
-  // two packs, opposite directions, staggered
+  if (document.body.classList.contains('theme-peachpit')) return;
+
   spawnPack(80, 1);
   setTimeout(() => spawnPack(window.innerWidth - 220, -1), 1600);
   initCursorTrail();
