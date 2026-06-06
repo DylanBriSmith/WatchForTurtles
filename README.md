@@ -24,20 +24,29 @@ Then open http://localhost:8080
 
 ## GitHub Pages
 
-Pages is configured to publish from the **`main`** branch, root folder.
+The repo includes `.github/workflows/deploy-pages.yml` to publish the site on every push to `main`.
 
-After push, the site is available at:
+**Important:** `WatchForTurtles` is a **private** repo. On a free GitHub plan, Pages only works on **public** repos. Either:
 
-- https://dylanbrismith.github.io/WatchForTurtles/ (until custom domain is wired)
-- https://watchforturtles.ca (after Cloudflare + GitHub custom domain)
+- **Recommended for a band promo site:** make the repo **public**, or
+- Keep it private and use a **paid GitHub plan** (Pro+) that allows Pages on private repos.
+
+### Enable Pages (one-time)
+
+1. Open https://github.com/DylanBriSmith/WatchForTurtles/settings/pages
+2. Under **Build and deployment** → **Source**, choose **GitHub Actions** (not “Deploy from branch”).
+3. Push to `main` (or run the workflow manually: **Actions** → **Deploy to GitHub Pages** → **Run workflow**).
+4. Wait 1–3 minutes. Site URL:
+   - https://dylanbrismith.github.io/WatchForTurtles/
+   - https://watchforturtles.ca (after Cloudflare + custom domain below)
 
 The `CNAME` file points GitHub Pages at `watchforturtles.ca`.
 
-### Enable Pages (one-time, if not already on)
+### If you still see “There isn’t a GitHub Pages site here”
 
-1. Repo → **Settings** → **Pages**
-2. **Source:** Deploy from branch → `main` → `/ (root)`
-3. Save. Wait 1–3 minutes for the first deploy.
+- Repo is still **private** on a free account → make it public under **Settings → General → Danger zone → Change visibility**.
+- Pages source is not set to **GitHub Actions** → fix in **Settings → Pages**.
+- First deploy still running → check **Actions** tab for a green checkmark.
 
 ## Cloudflare (custom domain)
 
