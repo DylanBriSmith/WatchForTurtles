@@ -1,4 +1,3 @@
-// ── Inject styles ──
 const style = document.createElement('style');
 style.textContent = `
   .turtle {
@@ -28,7 +27,6 @@ style.textContent = `
 document.head.appendChild(style);
 
 
-// ── Turtle packs ──
 function spawnPack(startX, direction) {
   const yBase = window.innerHeight - 50;
   const spacing = 46;
@@ -41,7 +39,6 @@ function spawnPack(startX, direction) {
     document.body.appendChild(el);
 
     const yOff = (Math.random() - 0.5) * 14;
-    // stagger each turtle's step phase so they don't all bob in sync
     turtles.push({ el, x: startX + i * spacing, y: yBase + yOff, yBase: yBase + yOff, frame: i * 8 });
   }
 
@@ -52,7 +49,6 @@ function spawnPack(startX, direction) {
     turtles.forEach(t => {
       t.frame++;
 
-      // walking bob: hits ground every ~half cycle, rises between steps
       const bob = Math.abs(Math.sin(t.frame * 0.14)) * -5;
 
       t.x += vx;
@@ -62,7 +58,6 @@ function spawnPack(startX, direction) {
       t.el.style.top  = t.y + 'px';
     });
 
-    // whole pack bounces together
     const pad = 40;
     const xs  = turtles.map(t => t.x);
     const minX = Math.min(...xs);
@@ -85,7 +80,6 @@ function spawnPack(startX, direction) {
 }
 
 
-// ── Cursor trail ──
 function initCursorTrail() {
   const chars = ['✦', '·', '✧', '⋆', '·', '·'];
   let last = 0;
@@ -107,7 +101,6 @@ function initCursorTrail() {
 }
 
 
-// ── Init (Peach Pit theme uses GSAP only — skip decorative effects) ──
 window.addEventListener('DOMContentLoaded', () => {
   if (document.body.classList.contains('theme-peachpit')) return;
 

@@ -1,13 +1,3 @@
-/**
- * Shared site shell: draggable icons/windows, lightbox, mailing list, clock.
- * Used by index.html (Win95) and index2.html (Peach Pit).
- *
- * Peach Pit only: optional window.peachPitGsap from gsap-peachpit.js (prepareOpen, animateOpen, animateClose).
- * Globals: openWindow(id), closeWindow(id) — kept for onclick-free pages using data-open-window.
- *
- * See PEACH_PIT.md for file map and Next.js notes.
- */
-
 let zTop = 200;
 
 function prepareWindowReveal(win) {
@@ -24,7 +14,6 @@ function finishWindowClose(id, win) {
   removeTaskbarBtn(id);
 }
 
-// ── Randomise icon positions on load ──
 window.addEventListener('DOMContentLoaded', () => {
   const pad = 20;
   const iconW = 210;
@@ -39,31 +28,11 @@ window.addEventListener('DOMContentLoaded', () => {
     icon.style.top = Math.round(minY + Math.random() * (maxY - minY)) + 'px';
   });
 
-  const showsWin = document.getElementById('window-shows');
-  if (showsWin) {
-    const observer = new MutationObserver(() => {
-      const iframe = showsWin.querySelector('iframe');
-      if (!iframe) return;
-      observer.disconnect();
-      iframe.addEventListener('load', () => {
-        openWindow('window-shows');
-        if (window.innerWidth > 768) {
-          const win = document.getElementById('window-shows');
-          const w = win.offsetWidth || 380;
-          win.style.left = Math.max(16, Math.round((window.innerWidth - w) / 2) - 120) + 'px';
-          win.style.top = Math.max(26, Math.round(window.innerHeight * 0.12)) + 'px';
-        }
-      });
-    });
-    observer.observe(showsWin, { childList: true, subtree: true });
-  }
-
   document.querySelectorAll('[data-open-window]').forEach((el) => {
     el.addEventListener('click', () => openWindow(el.getAttribute('data-open-window')));
   });
 });
 
-// ── Generic drag (mouse + touch) ──
 function makeDraggable(el, handle) {
   handle = handle || el;
   let dragging = false;
@@ -120,7 +89,6 @@ function makeDraggable(el, handle) {
   document.addEventListener('touchend', onEnd);
 }
 
-// ── Icons ──
 const icons = document.querySelectorAll('.icon');
 
 icons.forEach((icon) => {
@@ -164,7 +132,6 @@ if (desktop) {
   });
 }
 
-// ── Window management ──
 function openWindow(id) {
   const win = document.getElementById(id);
   if (!win) return;
@@ -219,7 +186,6 @@ document.querySelectorAll('.window').forEach((win) => {
   });
 });
 
-// ── Taskbar ──
 function titleFor(id) {
   const bar = document.getElementById(id)?.querySelector('.window-titlebar span');
   if (!bar) return id;
@@ -252,7 +218,6 @@ function removeTaskbarBtn(id) {
   document.getElementById('tbtn-' + id)?.remove();
 }
 
-// ── Lightbox ──
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 
@@ -273,7 +238,6 @@ if (lightbox && lightboxImg) {
   });
 }
 
-// ── Mailing list AJAX submit ──
 const mlForm = document.querySelector('.ml-form');
 if (mlForm) {
   mlForm.addEventListener('submit', async (e) => {
@@ -303,7 +267,6 @@ if (mlForm) {
   });
 }
 
-// ── Clock ──
 function updateClock() {
   const clockEl = document.getElementById('clock');
   if (!clockEl) return;

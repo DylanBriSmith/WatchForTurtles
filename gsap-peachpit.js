@@ -1,22 +1,8 @@
-/**
- * gsap-peachpit.js — Peach Pit theme only (index2 + body.theme-peachpit).
- *
- * Responsibilities:
- *   1) Page-load intro timeline (header, nav, chrome, sticky).
- *   2) window.peachPitGsap — hooks for script.js (window open/close animations).
- *   3) Instagram oEmbed injection + ScrollTrigger reveal on #ig-scroll-panel.
- *
- * Dependencies (load order in index2.html): gsap.min.js → ScrollTrigger → instagram-config.js → script.js → this file.
- * See PEACH_PIT.md for contracts and Next.js migration notes.
- *
- * @file
- */
 (function peachPitGsapModule() {
   if (!document.body.classList.contains('theme-peachpit') || typeof gsap === 'undefined') {
     return;
   }
 
-  // ── DOM ids (keep in sync with index2.html) ─────────────────────────────
   const ID = {
     IG_SCROLL_PANEL: 'ig-scroll-panel',
     IG_LATEST: 'ig-latest',
@@ -79,7 +65,6 @@
     gsap.set(innerEls, { clearProps: 'opacity,y' });
   }
 
-  // ── 1) Intro ───────────────────────────────────────────────────────────
   function runIntro() {
     if (prefersReducedMotion) return;
 
@@ -179,7 +164,6 @@
     observer.observe(root, { attributes: true, attributeFilter: ['class'] });
   }
 
-  // ── 2) Public API for script.js (windows) ─────────────────────────────
   window.peachPitGsap = {
     prepareOpen(win) {
       if (prefersReducedMotion) return;
@@ -259,7 +243,6 @@
     },
   };
 
-  // ── 3) Instagram embed + ScrollTrigger ────────────────────────────────
   function setupInstagramEmbed() {
     const root = document.getElementById(ID.IG_EMBED_ROOT);
     const fallback = document.getElementById(ID.IG_EMBED_FALLBACK);
@@ -353,7 +336,6 @@
     });
   }
 
-  // ── Init ───────────────────────────────────────────────────────────────
   window.addEventListener('DOMContentLoaded', () => {
     runIntro();
     wireNavPress();

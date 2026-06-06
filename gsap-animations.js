@@ -1,6 +1,3 @@
-/**
- * GSAP entry — safe with icon randomisation in script.js (does not move .icon elements).
- */
 window.addEventListener('DOMContentLoaded', () => {
   if (typeof gsap === 'undefined') return;
 
