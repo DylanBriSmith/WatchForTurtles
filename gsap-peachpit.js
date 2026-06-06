@@ -53,7 +53,7 @@
     '.photo-grid img, .track, .btn-link, .bio-text, .win-section, .contact-list, .ml-form';
 
   const TITLE_GLOW =
-    '2px 2px 10px #000, 0 0 30px rgba(183,255,247,0.55), 0 0 2px rgba(249,240,134,0.9)';
+    '2px 2px 10px #000, 0 0 24px rgba(200,230,201,0.55), 0 0 8px rgba(255,107,53,0.4)';
 
   function queryInnerAnimated(bodyEl) {
     if (!bodyEl) return [];
@@ -68,25 +68,22 @@
   function runIntro() {
     if (prefersReducedMotion) return;
 
+    gsap.set('.bg-photo', { scale: 1.14 });
     gsap.set('.bg-overlay', { opacity: 0 });
     gsap.set('.scanlines', { opacity: 0 });
     gsap.set('.band-name', { opacity: 0, y: 28, filter: 'blur(6px)' });
     gsap.set('.tagline', { opacity: 0, y: 16 });
     gsap.set('.pp-btn', { opacity: 0, y: 22 });
     gsap.set('.pp-rule', { opacity: 0, letterSpacing: '0.2em' });
-    gsap.set('.sticky', {
-      opacity: 0,
-      scale: 0.75,
-      rotation: -6,
-      transformOrigin: 'center center',
-    });
+    gsap.set('.sticky', { opacity: 0, scale: 0.8, transformOrigin: 'top right' });
     gsap.set('.ml-bar', { opacity: 0, y: 28 });
     gsap.set('.bottom-ticker', { opacity: 0, y: 20 });
     gsap.set('.corner-clock', { opacity: 0, y: 12, scale: 0.85 });
 
     const tl = gsap.timeline({ defaults: { ease: EASE.out } });
 
-    tl.to('.bg-overlay', { opacity: 1, duration: DUR.overlay }, 0)
+    tl.to('.bg-photo', { scale: 1.06, duration: 14, ease: 'power1.out' }, 0)
+      .to('.bg-overlay', { opacity: 1, duration: DUR.overlay }, 0)
       .to('.scanlines', { opacity: 1, duration: DUR.scanlines }, 0.08)
       .to(
         '.band-name',
@@ -104,11 +101,7 @@
         { opacity: 0.7, letterSpacing: '0.6em', duration: DUR.rule, ease: EASE.outStrong },
         0.52
       )
-      .to(
-        '.sticky',
-        { opacity: 1, scale: 1, rotation: 2.8, duration: DUR.sticky, ease: EASE.pop },
-        0.48
-      )
+      .to('.sticky', { opacity: 1, scale: 1, duration: DUR.sticky, ease: EASE.pop }, 0.48)
       .to('.ml-bar', { opacity: 1, y: 0, duration: DUR.mlBar, ease: EASE.pop }, 0.62)
       .to('.bottom-ticker', { opacity: 1, y: 0, duration: DUR.ticker }, 0.68)
       .to(
@@ -127,6 +120,15 @@
       },
       0.95
     );
+
+    gsap.to('.bg-photo', {
+      scale: 1.1,
+      duration: 28,
+      ease: 'none',
+      repeat: -1,
+      yoyo: true,
+      delay: 2,
+    });
   }
 
   function wireNavPress() {

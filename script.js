@@ -8,10 +8,23 @@ function playWindowOpenAnimation(win) {
   window.peachPitGsap?.animateOpen?.(win);
 }
 
+function syncActiveNav() {
+  const open = [...document.querySelectorAll('.window')].filter((w) => w.style.visibility === 'visible');
+  if (!open.length) {
+    clearActiveNav();
+    return;
+  }
+  const top = open.reduce((a, b) =>
+    parseInt(a.style.zIndex, 10) > parseInt(b.style.zIndex, 10) ? a : b
+  );
+  setActiveNav(top.id);
+}
+
 function finishWindowClose(id, win) {
   win.style.visibility = 'hidden';
   win.style.pointerEvents = 'none';
   removeTaskbarBtn(id);
+  syncActiveNav();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -29,7 +42,14 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   document.querySelectorAll('[data-open-window]').forEach((el) => {
-    el.addEventListener('click', () => openWindow(el.getAttribute('data-open-window')));
+    el.addEventListener('click', () => {
+      const id = el.getAttribute('data-open-window');
+      if (isWindowOpen(id)) {
+        closeWindow(id);
+      } else {
+        openWindow(id);
+      }
+    });
   });
 });
 
@@ -49,6 +69,7 @@ function makeDraggable(el, handle) {
     sl = parseInt(el.style.left, 10) || 0;
     st = parseInt(el.style.top, 10) || 0;
     el.style.zIndex = ++zTop;
+    el.classList.add('is-dragging');
   }
 
   function onMove(cx, cy) {
@@ -62,6 +83,7 @@ function makeDraggable(el, handle) {
 
   function onEnd() {
     dragging = false;
+    el.classList.remove('is-dragging');
   }
 
   handle.addEventListener('mousedown', (e) => {
@@ -132,6 +154,23 @@ if (desktop) {
   });
 }
 
+function isWindowOpen(id) {
+  const win = document.getElementById(id);
+  return win && win.style.visibility === 'visible';
+}
+
+function setActiveNav(id) {
+  document.querySelectorAll('[data-open-window]').forEach((btn) => {
+    btn.classList.toggle('pp-btn--active', btn.getAttribute('data-open-window') === id);
+  });
+}
+
+function clearActiveNav() {
+  document.querySelectorAll('[data-open-window]').forEach((btn) => {
+    btn.classList.remove('pp-btn--active');
+  });
+}
+
 function openWindow(id) {
   const win = document.getElementById(id);
   if (!win) return;
@@ -159,6 +198,7 @@ function openWindow(id) {
   win.style.zIndex = ++zTop;
 
   addTaskbarBtn(id);
+  setActiveNav(id);
   playWindowOpenAnimation(win);
 }
 
@@ -232,9 +272,19 @@ if (lightbox && lightboxImg) {
   lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+    if (e.key !== 'Escape') return;
+    if (lightbox.classList.contains('open')) {
       lightbox.classList.remove('open');
+      return;
     }
+    const openWins = [...document.querySelectorAll('.window')].filter(
+      (w) => w.style.visibility === 'visible'
+    );
+    if (!openWins.length) return;
+    const top = openWins.reduce((a, b) =>
+      parseInt(a.style.zIndex, 10) > parseInt(b.style.zIndex, 10) ? a : b
+    );
+    closeWindow(top.id);
   });
 }
 
@@ -268,11 +318,12 @@ if (mlForm) {
 }
 
 function updateClock() {
-  const clockEl = document.getElementById('clock');
+  const clockEl = document.querySelector('.clock-time');
   if (!clockEl) return;
   const now = new Date();
-  clockEl.textContent =
-    now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+  const h = now.getHours().toString().padStart(2, '0');
+  const m = now.getMinutes().toString().padStart(2, '0');
+  clockEl.innerHTML = h + '<span class="clock-colon">:</span>' + m;
 }
 setInterval(updateClock, 1000);
 updateClock();

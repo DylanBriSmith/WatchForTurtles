@@ -18,10 +18,6 @@ html, body {
   height: 100%;
   overflow: hidden;
   background-color: var(--bg);
-  background-image: url('media/Background3.JPG');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   color: var(--primary);
   font-family: var(--font-serif);
   font-weight: bold;
@@ -29,13 +25,29 @@ html, body {
   cursor: default;
 }
 
-/* subtle overlay */
+.bg-photo {
+  position: fixed;
+  inset: -4%;
+  z-index: 0;
+  background: url('media/Background3.JPG') center / cover no-repeat;
+  transform: scale(1.06);
+  will-change: transform;
+}
+
 .bg-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.4);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* ── CRT Scanlines ── */
@@ -51,6 +63,11 @@ html, body {
   );
   pointer-events: none;
   z-index: 9999;
+  animation: scanline-flicker 5s ease-in-out infinite;
+}
+@keyframes scanline-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.88; }
 }
 
 /* ── Top Ticker ── */
@@ -139,6 +156,11 @@ html, body {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--bg);
+}
+.pp-btn--active {
+  background: var(--primary);
+  color: var(--bg);
+  box-shadow: 0 0 12px rgba(200,230,201,0.35);
 }
 .pp-btn:focus-visible,
 .win-close:focus-visible,
@@ -229,6 +251,13 @@ html, body {
   font-weight: bold;
   z-index: 200;
   box-shadow: 2px 2px 0 #000;
+  transition: box-shadow 0.15s ease;
+}
+.window.is-dragging {
+  box-shadow: 6px 10px 28px rgba(0,0,0,0.5);
+}
+#window-shows {
+  width: 420px;
 }
 
 .window-titlebar {
@@ -386,26 +415,34 @@ html, body {
   border: 1px solid var(--muted);
   display: block;
   cursor: pointer;
-  filter: grayscale(20%);
-  transition: filter 0.2s ease;
+  filter: grayscale(25%);
+  transition: filter 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 .photo-grid img:hover {
   filter: grayscale(0%);
   border-color: var(--accent);
+  transform: scale(1.03);
 }
 
 /* ── Lightbox ── */
 .lightbox {
-  display: none;
+  display: flex;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.92);
+  background: rgba(0,0,0,0);
   z-index: 9000;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
 }
-.lightbox.open { display: flex; }
+.lightbox.open {
+  pointer-events: auto;
+  opacity: 1;
+  background: rgba(0,0,0,0.92);
+}
 .lightbox-img {
   max-width: 92vw;
   max-height: 88vh;
@@ -441,6 +478,12 @@ html, body {
   max-width: 120px;
   pointer-events: none;
   z-index: 15;
+  animation: sticky-sway 6s ease-in-out infinite;
+  transform-origin: top right;
+}
+@keyframes sticky-sway {
+  0%, 100% { transform: rotate(2.8deg); }
+  50% { transform: rotate(1.2deg); }
 }
 .sticky-sig { display: block; margin-top: 4px; font-size: 0.88rem; color: #666; }
 
@@ -462,21 +505,22 @@ html, body {
 /* ── Bottom ticker ── */
 .bottom-ticker {
   position: fixed;
-  bottom: 58px;
+  bottom: 52px;
   left: 0; right: 0;
   font-family: var(--font-serif);
   font-weight: bold;
-  font-size: 2.8rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.9rem);
   color: var(--primary);
   pointer-events: none;
   z-index: 16;
   text-shadow: 1px 1px 4px #000;
+  letter-spacing: 0.04em;
 }
 
 /* ── Mailing list bar ── */
 .ml-bar {
   position: fixed;
-  bottom: calc(58px + 2.8rem + 10px);
+  bottom: calc(52px + clamp(1.1rem, 3.5vw, 1.9rem) + 14px);
   left: 0; right: 0;
   display: flex;
   justify-content: center;
@@ -548,6 +592,13 @@ html, body {
   text-shadow: 1px 1px 4px #000;
   z-index: 8000;
   pointer-events: none;
+}
+.clock-time .clock-colon {
+  animation: clock-blink 1s step-end infinite;
+}
+@keyframes clock-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.25; }
 }
 
 /* ── Mobile ── */
@@ -634,11 +685,16 @@ html, body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scanlines { display: none; }
+  .scanlines { display: none; animation: none; }
+  .sticky { animation: none; transform: rotate(2.8deg); }
   .bottom-ticker marquee { animation: none; }
+  .clock-time .clock-colon { animation: none; }
+  .bg-photo { transform: scale(1); }
   .pp-btn,
   .btn-link,
-  .photo-grid img {
+  .photo-grid img,
+  .lightbox,
+  .window {
     transition: none;
   }
 }
