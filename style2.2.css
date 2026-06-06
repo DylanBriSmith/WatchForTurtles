@@ -71,7 +71,7 @@ html, body {
 /* ── Peach Pit-style header ── */
 .pp-header {
   position: fixed;
-  top: 36px;
+  top: 0;
   left: 0; right: 0;
   text-align: center;
   padding: 18px 20px 0;
@@ -139,6 +139,15 @@ html, body {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--bg);
+}
+.pp-btn:focus-visible,
+.win-close:focus-visible,
+.btn-link:focus-visible,
+.ml-form input[type="submit"]:focus-visible,
+.ml-form input[type="email"]:focus-visible,
+.ml-form input[type="text"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* Decorative rule */
@@ -325,6 +334,35 @@ html, body {
 .btn-link:active {
   border-color: #808080 #ffffff #ffffff #808080;
 }
+.btn-link--soon {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.shows-fallback {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+.shows-fallback a {
+  color: #000080;
+  text-decoration: none;
+}
+.shows-fallback a:hover { text-decoration: underline; }
+#window-shows:has(iframe) .shows-fallback { display: none; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .bio-text {
   font-size: 1rem;
@@ -333,6 +371,7 @@ html, body {
   margin-bottom: 12px;
 }
 .highlight-text { color: #000080; line-height: 1.7; }
+.highlight-text a { color: #000080; }
 
 .photo-grid {
   display: grid;
@@ -592,4 +631,14 @@ html, body {
     font-size: 1.4rem;
   }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanlines { display: none; }
+  .bottom-ticker marquee { animation: none; }
+  .pp-btn,
+  .btn-link,
+  .photo-grid img {
+    transition: none;
+  }
 }

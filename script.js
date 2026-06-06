@@ -49,8 +49,9 @@ window.addEventListener('DOMContentLoaded', () => {
         openWindow('window-shows');
         if (window.innerWidth > 768) {
           const win = document.getElementById('window-shows');
-          win.style.top = Math.max(26, parseInt(win.style.top, 10) - 220) + 'px';
-          win.style.left = Math.max(0, parseInt(win.style.left, 10) - 500) + 'px';
+          const w = win.offsetWidth || 380;
+          win.style.left = Math.max(16, Math.round((window.innerWidth - w) / 2) - 120) + 'px';
+          win.style.top = Math.max(26, Math.round(window.innerHeight * 0.12)) + 'px';
         }
       });
     });
@@ -264,6 +265,12 @@ if (lightbox && lightboxImg) {
   });
 
   lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+      lightbox.classList.remove('open');
+    }
+  });
 }
 
 // ── Mailing list AJAX submit ──

@@ -3,180 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Post-punk. Toronto. Booking — band@watchforturtles.ca">
+  <meta name="description" content="Watch for Turtles — post-punk from Toronto. Booking: band@watchforturtles.ca">
+  <link rel="canonical" href="https://watchforturtles.ca/">
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://watchforturtles.ca/">
   <meta property="og:site_name"   content="Watch for Turtles">
   <meta property="og:title"       content="Watch for Turtles">
-  <meta property="og:description" content="Post-punk. Toronto. Booking — band@watchforturtles.ca">
-  <meta property="og:image"       content="https://watchforturtles.ca/media/Background.jpeg">
+  <meta property="og:description" content="Post-punk from Toronto. Booking — band@watchforturtles.ca">
+  <meta property="og:image"       content="https://watchforturtles.ca/media/Background3.JPG">
   <meta property="og:image:alt"   content="Watch for Turtles">
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="Watch for Turtles">
-  <meta name="twitter:description" content="Post-punk. Toronto. Booking — band@watchforturtles.ca">
-  <meta name="twitter:image"       content="https://watchforturtles.ca/media/Background.jpeg">
+  <meta name="twitter:description" content="Post-punk from Toronto. Booking — band@watchforturtles.ca">
+  <meta name="twitter:image"       content="https://watchforturtles.ca/media/Background3.JPG">
   <meta name="twitter:image:alt"   content="Watch for Turtles">
   <title>Watch for Turtles</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style2.2.css">
 </head>
-<body>
+<body class="theme-peachpit">
 
   <div class="scanlines" aria-hidden="true"></div>
+  <div class="bg-overlay" aria-hidden="true"></div>
 
-  <div class="ticker-bar">
-    <marquee scrollamount="4">★ LMFAO IS MY FAVOURITE BAND I LOVE LMFAO FUCK YOPU ★ LMFAO IS MY FAVOURITE BAND I LOVE LMFAO FUCK YOPU ★ LMFAO IS MY FAVOURITE BAND I LOVE LMFAO FUCK YOPU ★ </marquee>
-  </div>
-
+  <header class="pp-header">
+    <h1 class="band-name">Watch for Turtles</h1>
+    <p class="tagline">post-punk · toronto</p>
+    <nav class="pp-nav" aria-label="Site sections">
+      <button type="button" class="pp-btn" data-open-window="window-music">Music</button>
+      <button type="button" class="pp-btn" data-open-window="window-photos">Photos</button>
+      <button type="button" class="pp-btn" data-open-window="window-shows">Shows</button>
+      <button type="button" class="pp-btn" data-open-window="window-bio">Bio</button>
+      <button type="button" class="pp-btn" data-open-window="window-contact">Contact</button>
+      <a class="pp-btn" href="https://www.instagram.com/watchforturtles/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+    <div class="pp-rule" aria-hidden="true">✦ ✦ ✦</div>
+  </header>
 
   <main class="desktop" id="desktop">
-
-    <div class="icon" data-window="music" style="left:52px;top:120px">
-      <div class="icon-gfx"><img src="media/logos/music2.gif" alt="music"></div>
-      <div class="icon-label">MUSIC</div>
+    <div class="sticky" style="right:44px;top:20px;transform:rotate(2.8deg)">
+      no music out<br>yet<br><span class="sticky-sig">-Dylan</span>
     </div>
-
-    <div class="icon" data-window="bio" style="left:52px;top:248px">
-      <div class="icon-gfx"><img src="media/logos/notebook.gif" alt="bio"></div>
-      <div class="icon-label">BIO</div>
-    </div>
-
-    <div class="icon" data-window="photos" style="left:162px;top:120px">
-      <div class="icon-gfx"><i class="fa-solid fa-camera"></i></div>
-      <div class="icon-label">photos</div>
-    </div>
-
-    <div class="icon" data-window="contact" style="left:162px;top:248px">
-      <div class="icon-gfx"><img src="media/logos/mail.gif" alt="contact"></div>
-      <div class="icon-label">contact</div>
-    </div>
-
-    <div class="icon" data-href="#" style="left:272px;top:120px">
-      <div class="icon-gfx"><i class="fa-brands fa-instagram"></i></div>
-      <div class="icon-label">INSTAGRAM</div>
-    </div>
-
-    <div class="icon" data-href="#" style="left:272px;top:248px">
-      <div class="icon-gfx"><i class="fa-brands fa-tiktok"></i></div>
-      <div class="icon-label">TIKTOK</div>
-    </div>
-
-    <div class="icon" data-window="newsletter" style="left:272px;top:376px">
-      <div class="icon-gfx"><i class="fa-solid fa-at"></i></div>
-      <div class="icon-label">newsletter</div>
-    </div>
-
-    <div class="sticky" style="right:44px;top:78px;transform:rotate(2.8deg)">
-      We have no fucking<br>music out yet<br><span class="sticky-sig">-Dylan</span>
-    </div>
-
-    <div class="now-playing">♪ shell shock — wft</div>
-    <div class="visitor-counter">visitor no. 00413</div>
-
   </main>
 
-  <div class="window" id="window-music">
+  <div class="window" id="window-shows" role="dialog" aria-labelledby="window-shows-title">
     <div class="window-titlebar">
-      <span>music.exe</span>
-      <button class="win-close" data-target="window-music">✕</button>
+      <span id="window-shows-title">shows.exe</span>
+      <button class="win-close" type="button" data-target="window-shows" aria-label="Close shows window">✕</button>
+    </div>
+    <div class="window-body">
+      <p class="win-section">// upcoming shows</p>
+      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DVWhe-5j93g/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px auto;max-width:540px;min-width:280px;padding:0;width:99.375%;width:calc(100% - 2px);"></blockquote>
+      <p class="shows-fallback">
+        <a href="https://www.instagram.com/watchforturtles/" target="_blank" rel="noopener noreferrer">@watchforturtles on Instagram</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="window" id="window-music" role="dialog" aria-labelledby="window-music-title">
+    <div class="window-titlebar">
+      <span id="window-music-title">music.exe</span>
+      <button class="win-close" type="button" data-target="window-music" aria-label="Close music window">✕</button>
     </div>
     <div class="window-body">
       <p class="win-section">// releases</p>
       <div class="track-list">
-        <div class="track"><span>► nothing out atm</span><span class="track-year">2026</span></div>
+        <div class="track"><span>► nothing out yet</span><span class="track-year">2026</span></div>
       </div>
       <p class="win-section">// stream / download</p>
       <div class="win-links">
-        <a href="#" class="btn-link">SPOTIFY</a>
-        <a href="#" class="btn-link">apple music</a>
-        <a href="#" class="btn-link">BANDCAMP</a>
+        <a href="#" class="btn-link btn-link--soon" aria-disabled="true" tabindex="-1">SPOTIFY</a>
+        <a href="#" class="btn-link btn-link--soon" aria-disabled="true" tabindex="-1">apple music</a>
+        <a href="#" class="btn-link btn-link--soon" aria-disabled="true" tabindex="-1">BANDCAMP</a>
       </div>
     </div>
   </div>
 
-  <div class="window" id="window-bio">
+  <div class="window" id="window-bio" role="dialog" aria-labelledby="window-bio-title">
     <div class="window-titlebar">
-      <span>BIO.txt</span>
-      <button class="win-close" data-target="window-bio">✕</button>
+      <span id="window-bio-title">BIO.txt</span>
+      <button class="win-close" type="button" data-target="window-bio" aria-label="Close bio window">✕</button>
     </div>
     <div class="window-body">
       <p class="win-section">// about</p>
       <p class="bio-text">we're watch for turtles. post-punk band. we play loud and we play fast and sometimes we play slow if the song calls for it.</p>
       <p class="bio-text">been at it since 2022. four people, one practice space, no air conditioning. influenced by wire, fugazi, the sound of the radiator in our practice room.</p>
-      <p class="bio-text highlight-text">BOOKING 2026 NOW<br>band@watchforturtles.com</p>
+      <p class="bio-text highlight-text">BOOKING 2026 NOW<br><a href="mailto:band@watchforturtles.ca">band@watchforturtles.ca</a></p>
     </div>
   </div>
 
-  <div class="window" id="window-photos">
+  <div class="window" id="window-photos" role="dialog" aria-labelledby="window-photos-title">
     <div class="window-titlebar">
-      <span>photos</span>
-      <button class="win-close" data-target="window-photos">✕</button>
+      <span id="window-photos-title">photos.exe</span>
+      <button class="win-close" type="button" data-target="window-photos" aria-label="Close photos window">✕</button>
     </div>
     <div class="window-body">
-      <p class="win-section">// The Monarch Show Jan 30 2026</p>
+      <p class="win-section">// The Monarch — Jan 30 2026</p>
       <div class="photo-grid">
-        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-5.jpg" alt="Watch for Turtles live" loading="lazy">
-        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-1.jpg" alt="Watch for Turtles live" loading="lazy">
-        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-20.jpg" alt="Watch for Turtles live" loading="lazy">
-        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-3.jpg" alt="Watch for Turtles live" loading="lazy">
-        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-6.jpg" alt="Watch for Turtles live" loading="lazy">
-        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-19.jpg" alt="Watch for Turtles live" loading="lazy">
+        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-5.jpg" alt="Watch for Turtles live at The Monarch" loading="lazy">
+        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-1.jpg" alt="Watch for Turtles live at The Monarch" loading="lazy">
+        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-20.jpg" alt="Watch for Turtles live at The Monarch" loading="lazy">
+        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-3.jpg" alt="Watch for Turtles live at The Monarch" loading="lazy">
+        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-6.jpg" alt="Watch for Turtles live at The Monarch" loading="lazy">
+        <img src="media/photos/watch%20for%20turtles%20@%20monarch%20jan%2030%202026/fm_watchforturtles_jan3026_-19.jpg" alt="Watch for Turtles live at The Monarch" loading="lazy">
       </div>
     </div>
   </div>
 
-  <div class="window" id="window-contact">
+  <div class="window" id="window-contact" role="dialog" aria-labelledby="window-contact-title">
     <div class="window-titlebar">
-      <span>contact.txt</span>
-      <button class="win-close" data-target="window-contact">✕</button>
+      <span id="window-contact-title">contact.txt</span>
+      <button class="win-close" type="button" data-target="window-contact" aria-label="Close contact window">✕</button>
     </div>
     <div class="window-body">
       <p class="win-section">// email</p>
       <div class="contact-list">
-        <p>booking // general — <a href="mailto:band@watchforturtles.com">band@watchforturtles.com</a></p>
+        <p>booking / general — <a href="mailto:band@watchforturtles.ca">band@watchforturtles.ca</a></p>
       </div>
       <p class="win-section">// socials</p>
       <div class="win-links">
-        <a href="#" class="btn-link">INSTAGRAM</a>
-        <a href="#" class="btn-link">TIKTOK</a>
-        <a href="#" class="btn-link">facebook</a>
+        <a href="https://www.instagram.com/watchforturtles/" class="btn-link" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
       </div>
     </div>
   </div>
 
-  <div class="window" id="window-newsletter">
-    <div class="window-titlebar">
-      <span>newsletter.exe</span>
-      <button class="win-close" data-target="window-newsletter">✕</button>
-    </div>
-    <div class="window-body">
-      <p class="win-section">// mailing list</p>
-      <form method="post" action="https://listmonk.watchforturtles.ca/subscription/form" class="ml-form">
-        <input type="hidden" name="nonce" />
-        <input type="hidden" name="l" value="d81106be-7064-40ab-a299-68d67a687b43" />
-        <input type="email" name="email" required placeholder="email" />
-        <input type="text" name="name" placeholder="name" />
-        <input type="submit" value="subscribe" />
-      </form>
-    </div>
+  <div class="ml-bar">
+    <form method="post" action="https://listmonk.watchforturtles.ca/subscription/form" class="ml-form" aria-label="Mailing list signup">
+      <input type="hidden" name="nonce" />
+      <input type="hidden" name="l" value="d81106be-7064-40ab-a299-68d67a687b43" />
+      <label class="visually-hidden" for="ml-email">Email</label>
+      <input id="ml-email" type="email" name="email" required placeholder="email" autocomplete="email" />
+      <label class="visually-hidden" for="ml-name">Name</label>
+      <input id="ml-name" type="text" name="name" placeholder="name" autocomplete="name" />
+      <input type="submit" value="subscribe" />
+    </form>
   </div>
 
-  <div class="lightbox" id="lightbox">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
     <img class="lightbox-img" id="lightbox-img" src="" alt="">
   </div>
 
-  <footer class="taskbar">
-    <div class="taskbar-start">⚡ WFT</div>
-    <div class="taskbar-wins" id="taskbar-wins"></div>
-    <div class="taskbar-clock" id="clock">00:00</div>
-  </footer>
+  <div class="bottom-ticker" aria-hidden="true">
+    <marquee scrollamount="5">★ join the mailing list ★   ★ join the mailing list ★   ★ join the mailing list ★   ★ join the mailing list ★   ★ join the mailing list ★  </marquee>
+  </div>
 
+  <div class="corner-clock" id="clock" aria-hidden="true">00:00</div>
+
+  <script async src="https://www.instagram.com/embed.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
   <script src="script.js"></script>
   <script src="effects.js"></script>
-  <script src="gsap-animations.js"></script>
+  <script src="gsap-peachpit.js"></script>
 </body>
 </html>
