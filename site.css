@@ -208,6 +208,9 @@ html, body {
 #window-shows {
   width: 420px;
 }
+#window-photos {
+  width: 440px;
+}
 
 .window-titlebar {
   display: flex;
@@ -368,13 +371,13 @@ html, body {
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-bottom: 12px;
+  align-items: start;
 }
 .photo-grid picture {
   display: block;
   background: #2a2a2a;
   border: 1px solid var(--muted);
   cursor: pointer;
-  overflow: hidden;
   transition: border-color 0.25s ease, filter 0.25s ease;
 }
 .photo-grid picture:hover {
@@ -383,8 +386,9 @@ html, body {
 .photo-grid img {
   width: 100%;
   height: auto;
+  max-width: 100%;
+  object-fit: contain;
   display: block;
-  vertical-align: middle;
   cursor: pointer;
   filter: grayscale(25%);
   transition: filter 0.25s ease;
