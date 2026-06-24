@@ -371,21 +371,26 @@ html, body {
 }
 .photo-grid picture {
   display: block;
+  background: #2a2a2a;
+  border: 1px solid var(--muted);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.25s ease, filter 0.25s ease;
+}
+.photo-grid picture:hover {
+  border-color: var(--accent);
 }
 .photo-grid img {
   width: 100%;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  border: 1px solid var(--muted);
+  height: auto;
   display: block;
+  vertical-align: middle;
   cursor: pointer;
   filter: grayscale(25%);
-  transition: filter 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  transition: filter 0.25s ease;
 }
-.photo-grid img:hover {
+.photo-grid picture:hover img {
   filter: grayscale(0%);
-  border-color: var(--accent);
-  transform: scale(1.03);
 }
 
 /* ── Lightbox ── */
