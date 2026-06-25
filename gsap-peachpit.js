@@ -63,7 +63,8 @@
     gsap.set('.tagline', { opacity: 0, y: 16 });
     gsap.set('.pp-btn', { opacity: 0, y: 22 });
     gsap.set('.pp-rule', { opacity: 0, letterSpacing: '0.2em' });
-    gsap.set('.sticky', { opacity: 0, scale: 0.8, transformOrigin: 'top right' });
+    gsap.set('.sticky--right', { opacity: 0, scale: 0.8, transformOrigin: 'top right' });
+    gsap.set('.sticky--left',  { opacity: 0, scale: 0.8, transformOrigin: 'top left' });
     gsap.set('.ml-bar', { opacity: 0, y: 28 });
     gsap.set('.bottom-ticker', { opacity: 0, y: 20 });
     gsap.set('.corner-clock', { opacity: 0, y: 12, scale: 0.85 });
@@ -90,7 +91,8 @@
         { opacity: 0.7, letterSpacing: '0.6em', duration: duration.rule, ease: ease.outStrong },
         0.52
       )
-      .to('.sticky', { opacity: 1, scale: 1, duration: duration.sticky, ease: ease.pop }, 0.48)
+      .to('.sticky--right', { opacity: 1, scale: 1, duration: duration.sticky, ease: ease.pop }, 0.48)
+      .to('.sticky--left',  { opacity: 1, scale: 1, duration: duration.sticky, ease: ease.pop }, 0.58)
       .to('.ml-bar', { opacity: 1, y: 0, duration: duration.mlBar, ease: ease.pop }, 0.62)
       .to('.bottom-ticker', { opacity: 1, y: 0, duration: duration.ticker }, 0.68)
       .to(
