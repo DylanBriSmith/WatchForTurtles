@@ -436,9 +436,11 @@ html, body {
 .window-body::-webkit-scrollbar-track { background: #c0c0c0; }
 .window-body::-webkit-scrollbar-thumb { background: #808080; border: 1px solid #fff; }
 
-/* ── Sticky notes ── */
+/* ── Sticky note ── */
 .sticky {
   position: absolute;
+  right: 44px;
+  top: 20px;
   background: #ffffa8;
   color: #222;
   padding: 8px 10px 10px;
@@ -451,26 +453,12 @@ html, body {
   max-width: 120px;
   pointer-events: none;
   z-index: 15;
-}
-.sticky--right {
-  right: 44px;
-  top: 20px;
   transform-origin: top right;
-  animation: sticky-sway-right 6s ease-in-out infinite;
+  animation: sticky-sway 6s ease-in-out infinite;
 }
-.sticky--left {
-  left: 36px;
-  top: 60px;
-  transform-origin: top left;
-  animation: sticky-sway-left 7s 1.2s ease-in-out infinite;
-}
-@keyframes sticky-sway-right {
+@keyframes sticky-sway {
   0%, 100% { transform: rotate(2.8deg); }
   50% { transform: rotate(1.2deg); }
-}
-@keyframes sticky-sway-left {
-  0%, 100% { transform: rotate(-2.2deg); }
-  50% { transform: rotate(-0.6deg); }
 }
 .sticky-sig { display: block; margin-top: 4px; font-size: 0.88rem; color: #666; }
 
@@ -657,8 +645,7 @@ html, body {
 
 @media (prefers-reduced-motion: reduce) {
   .scanlines { display: none; animation: none; }
-  .sticky--right { animation: none; transform: rotate(2.8deg); }
-  .sticky--left  { animation: none; transform: rotate(-2.2deg); }
+  .sticky { animation: none; transform: rotate(2.8deg); }
   .bottom-ticker marquee { animation: none; }
   .clock-time .clock-colon { animation: none; }
   .bg-photo { transform: scale(1); }
