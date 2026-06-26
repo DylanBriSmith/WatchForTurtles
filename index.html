@@ -27,54 +27,38 @@
   <script>
     (function () {
       var fonts = [
-        { f: 'Metal Mania',      q: 'Metal+Mania' },
-        { f: 'Creepster',        q: 'Creepster' },
-        { f: 'Permanent Marker', q: 'Permanent+Marker' },
-        { f: 'Pirata One',       q: 'Pirata+One' },
-        { f: 'Black Ops One',    q: 'Black+Ops+One' },
-        { f: 'Rubik Glitch',     q: 'Rubik+Glitch' },
-        { f: 'Monoton',          q: 'Monoton' },
-        { f: 'Rock Salt',        q: 'Rock+Salt' },
-        { f: 'Bungee Shade',     q: 'Bungee+Shade' },
-        { f: 'Butcherman',       q: 'Butcherman' },
-        { f: 'Nosifer',          q: 'Nosifer' },
-        { f: 'Rubik Wet Paint',  q: 'Rubik+Wet+Paint' },
-        { f: 'Eater',            q: 'Eater' },
-        { effect: 'fire' },
-        { effect: 'fire' },
+        ['Metal Mania',      'Metal+Mania'],
+        ['Creepster',        'Creepster'],
+        ['Permanent Marker', 'Permanent+Marker'],
+        ['Pirata One',       'Pirata+One'],
+        ['Black Ops One',    'Black+Ops+One'],
+        ['Rubik Glitch',     'Rubik+Glitch'],
+        ['Monoton',          'Monoton'],
+        ['Rock Salt',        'Rock+Salt'],
+        ['Bungee Shade',     'Bungee+Shade'],
+        ['Butcherman',       'Butcherman'],
+        ['Nosifer',          'Nosifer'],
+        ['Rubik Wet Paint',  'Rubik+Wet+Paint'],
+        ['Eater',            'Eater'],
+        ['Rubik Burned',     'Rubik+Burned'],
+        ['Rubik Beastly',    'Rubik+Beastly'],
+        ['Rubik Dirt',       'Rubik+Dirt'],
+        ['Rubik Puddles',    'Rubik+Puddles'],
+        ['New Rocker',       'New+Rocker'],
+        ['Lacquer',          'Lacquer'],
+        ['Warnes',           'Warnes'],
+        ['Climate Crisis',   'Climate+Crisis'],
+        ['Miltonian Tattoo', 'Miltonian+Tattoo'],
+        ['Wallpoet',         'Wallpoet'],
       ];
       var pick = fonts[Math.floor(Math.random() * fonts.length)];
-
-      if (pick.effect === 'fire') {
-        document.documentElement.classList.add('wft-fire');
-        var s = document.createElement('style');
-        s.textContent =
-          '@keyframes wft-fire {' +
-          '  0%   { text-shadow: 0 0 4px #fff, 0 -4px 9px #ff0, 0 -9px 16px #fa0, 0 -16px 26px #f60, 0 -26px 42px #f20, 0 -36px 58px rgba(180,0,0,0.6); }' +
-          '  50%  { text-shadow: 0 0 6px #fff, 0 -6px 12px #ff0, 0 -12px 20px #fa0, 0 -20px 32px #f60, 0 -32px 52px #f20, 0 -44px 70px rgba(180,0,0,0.5); }' +
-          '  100% { text-shadow: 0 0 4px #fff, 0 -3px 8px #ff0, 0 -8px 14px #fa0, 0 -14px 23px #f60, 0 -23px 38px #f20, 0 -32px 52px rgba(180,0,0,0.6); }' +
-          '}' +
-          '.wft-fire .band-name,' +
-          '.wft-fire .pp-btn,' +
-          '.wft-fire .tagline,' +
-          '.wft-fire .pp-rule,' +
-          '.wft-fire .bottom-ticker,' +
-          '.wft-fire .sticky { color: #ffe88a !important; animation: wft-fire 0.13s ease-in-out infinite alternate !important; }' +
-          '@media (prefers-reduced-motion: reduce) {' +
-          '  .wft-fire .band-name, .wft-fire .pp-btn, .wft-fire .tagline,' +
-          '  .wft-fire .pp-rule, .wft-fire .bottom-ticker, .wft-fire .sticky' +
-          '  { animation: none !important; text-shadow: 0 0 18px #f60; }' +
-          '}';
-        document.head.appendChild(s);
-      } else {
-        var val = "'" + pick.f + "', serif";
-        document.documentElement.style.setProperty('--band-font', val);
-        document.documentElement.style.setProperty('--font-serif', val);
-        var link = document.createElement('link');
-        link.rel  = 'stylesheet';
-        link.href = 'https://fonts.googleapis.com/css2?family=' + pick.q + '&display=swap';
-        document.head.appendChild(link);
-      }
+      var val = "'" + pick[0] + "', serif";
+      document.documentElement.style.setProperty('--band-font', val);
+      document.documentElement.style.setProperty('--font-serif', val);
+      var link = document.createElement('link');
+      link.rel  = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=' + pick[1] + '&display=swap';
+      document.head.appendChild(link);
     })();
   </script>
 </head>
