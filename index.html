@@ -39,7 +39,9 @@
         ['Butcherman',       'Butcherman'],
       ];
       var pick = fonts[Math.floor(Math.random() * fonts.length)];
-      document.documentElement.style.setProperty('--band-font', "'" + pick[0] + "', serif");
+      var val = "'" + pick[0] + "', serif";
+      document.documentElement.style.setProperty('--band-font', val);
+      document.documentElement.style.setProperty('--font-serif', val);
       var link = document.createElement('link');
       link.rel  = 'stylesheet';
       link.href = 'https://fonts.googleapis.com/css2?family=' + pick[1] + '&display=swap';
