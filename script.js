@@ -404,7 +404,13 @@ function cycleBandFont() {
 function setupBandNameCycler() {
   const h1 = document.querySelector('.band-name');
   if (!h1) return;
-  h1.addEventListener('click', cycleBandFont);
+  h1.addEventListener('click', () => {
+    if (window.peachPitGsap?.playBiteAnimation) {
+      window.peachPitGsap.playBiteAnimation(cycleBandFont);
+    } else {
+      cycleBandFont();
+    }
+  });
 }
 
 // --- Startup -----------------------------------------------------------------
