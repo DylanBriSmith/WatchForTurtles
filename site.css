@@ -436,6 +436,12 @@ html, body {
 .window-body::-webkit-scrollbar-track { background: #c0c0c0; }
 .window-body::-webkit-scrollbar-thumb { background: #808080; border: 1px solid #fff; }
 
+/* ── Press window — always Comic Sans, regardless of random font ── */
+#window-press .window-body,
+#window-press .window-body * {
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+}
+
 /* ── Sticky note ── */
 .sticky {
   position: absolute;
