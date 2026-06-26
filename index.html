@@ -51,7 +51,9 @@
         ['Miltonian Tattoo', 'Miltonian+Tattoo'],
         ['Wallpoet',         'Wallpoet'],
       ];
+      window.BAND_FONTS = fonts;
       var pick = fonts[Math.floor(Math.random() * fonts.length)];
+      window._currentBandFont = pick[0];
       var val = "'" + pick[0] + "', serif";
       document.documentElement.style.setProperty('--band-font', val);
       document.documentElement.style.setProperty('--font-serif', val);
