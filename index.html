@@ -22,6 +22,28 @@
   <title>Watch for Turtles</title>
   <link rel="preload" as="image" href="media/Background3.webp" type="image/webp">
   <link rel="stylesheet" href="site.css?v=3">
+  <script>
+    (function () {
+      var fonts = [
+        ['Metal Mania',      'Metal+Mania'],
+        ['Creepster',        'Creepster'],
+        ['Permanent Marker', 'Permanent+Marker'],
+        ['Pirata One',       'Pirata+One'],
+        ['Black Ops One',    'Black+Ops+One'],
+        ['Rubik Glitch',     'Rubik+Glitch'],
+        ['Monoton',          'Monoton'],
+        ['Rock Salt',        'Rock+Salt'],
+        ['Bungee Shade',     'Bungee+Shade'],
+        ['Butcherman',       'Butcherman'],
+      ];
+      var pick = fonts[Math.floor(Math.random() * fonts.length)];
+      document.documentElement.style.setProperty('--band-font', "'" + pick[0] + "', serif");
+      var link = document.createElement('link');
+      link.rel  = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=' + pick[1] + '&display=swap';
+      document.head.appendChild(link);
+    })();
+  </script>
 </head>
 <body class="theme-peachpit">
 
