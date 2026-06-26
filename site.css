@@ -88,6 +88,8 @@ html, body {
 }
 
 .band-name {
+  pointer-events: all;
+  cursor: pointer;
   font-family: var(--band-font, var(--font-serif));
   font-weight: bold;
   font-size: clamp(1.8rem, 5vw, 3.8rem);
