@@ -636,6 +636,12 @@ html, body {
   .ml-form input[type="email"],
   .ml-form input[type="text"] {
     width: 100%;
+    min-height: 44px;
+    padding: 10px;
+  }
+  .ml-form input[type="submit"] {
+    min-height: 44px;
+    padding: 10px 14px;
   }
 
   /* Hide desktop clutter */
