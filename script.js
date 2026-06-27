@@ -387,6 +387,7 @@ function cycleBandFont() {
 
   const h1 = document.querySelector('.band-name');
   const other = fonts.filter((f) => f[0] !== window._currentBandFont);
+  if (!other.length) { window._fontSwapping = false; return; }
   const pick = other[Math.floor(Math.random() * other.length)];
   window._currentBandFont = pick[0];
 
@@ -418,6 +419,7 @@ function cycleBandFont() {
   fontLink.addEventListener('load', () => {
     document.fonts.load(`1em '${pick[0]}'`).then(apply, apply);
   }, { once: true });
+  fontLink.addEventListener('error', apply, { once: true });
   fontLink.href = fontUrl;
 
   // Hard fallback: always restore the text within 2s
