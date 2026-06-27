@@ -382,23 +382,26 @@ function setupClock() {
 
 function cycleBandFont() {
   const fonts = window.BAND_FONTS;
-  if (!fonts || fonts.length < 2) return;
+  if (!fonts) return;
 
   const other = fonts.filter((f) => f[0] !== window._currentBandFont);
   const pick = other[Math.floor(Math.random() * other.length)];
   window._currentBandFont = pick[0];
 
-  const val = "'" + pick[0] + "', serif";
+  const val = `'${pick[0]}', serif`;
   document.documentElement.style.setProperty('--band-font', val);
   document.documentElement.style.setProperty('--font-serif', val);
 
   const existing = document.querySelector('link[data-band-font]');
-  if (existing) existing.remove();
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.dataset.bandFont = '1';
-  link.href = 'https://fonts.googleapis.com/css2?family=' + pick[1] + '&display=swap';
-  document.head.appendChild(link);
+  if (existing) {
+    existing.href = `https://fonts.googleapis.com/css2?family=${pick[1]}&display=swap`;
+  } else {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.dataset.bandFont = '1';
+    link.href = `https://fonts.googleapis.com/css2?family=${pick[1]}&display=swap`;
+    document.head.appendChild(link);
+  }
 }
 
 function setupBandNameCycler() {

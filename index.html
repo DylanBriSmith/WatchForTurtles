@@ -59,6 +59,7 @@
       document.documentElement.style.setProperty('--font-serif', val);
       var link = document.createElement('link');
       link.rel  = 'stylesheet';
+      link.dataset.bandFont = '1';
       link.href = 'https://fonts.googleapis.com/css2?family=' + pick[1] + '&display=swap';
       document.head.appendChild(link);
     })();
