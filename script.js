@@ -382,26 +382,46 @@ function setupClock() {
 
 function cycleBandFont() {
   const fonts = window.BAND_FONTS;
-  if (!fonts) return;
+  if (!fonts || window._fontSwapping) return;
+  window._fontSwapping = true;
 
+  const h1 = document.querySelector('.band-name');
   const other = fonts.filter((f) => f[0] !== window._currentBandFont);
   const pick = other[Math.floor(Math.random() * other.length)];
   window._currentBandFont = pick[0];
 
-  const val = `'${pick[0]}', serif`;
-  document.documentElement.style.setProperty('--band-font', val);
-  document.documentElement.style.setProperty('--font-serif', val);
+  const fontUrl = `https://fonts.googleapis.com/css2?family=${pick[1]}&display=swap`;
 
+  if (h1) h1.style.opacity = '0';
+
+  let applied = false;
+  const apply = () => {
+    if (applied) return;
+    applied = true;
+    const val = `'${pick[0]}', serif`;
+    document.documentElement.style.setProperty('--band-font', val);
+    document.documentElement.style.setProperty('--font-serif', val);
+    if (h1) h1.style.opacity = '';
+    window._fontSwapping = false;
+  };
+
+  // Get or create the stylesheet link, attach load listener before setting href
   const existing = document.querySelector('link[data-band-font]');
-  if (existing) {
-    existing.href = `https://fonts.googleapis.com/css2?family=${pick[1]}&display=swap`;
-  } else {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.dataset.bandFont = '1';
-    link.href = `https://fonts.googleapis.com/css2?family=${pick[1]}&display=swap`;
-    document.head.appendChild(link);
-  }
+  const fontLink = existing || (() => {
+    const l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.dataset.bandFont = '1';
+    document.head.appendChild(l);
+    return l;
+  })();
+
+  fontLink.addEventListener('load', () => {
+    document.fonts.load(`1em '${pick[0]}'`).then(apply, apply);
+  }, { once: true });
+  fontLink.href = fontUrl;
+
+  // Hard fallback: always restore the text within 2s
+  setTimeout(apply, 2000);
 }
 
 function setupBandNameCycler() {
