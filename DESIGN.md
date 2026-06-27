@@ -46,6 +46,26 @@ Current pool (see `fonts.md` for full list and vibes): Metal Mania, Creepster, P
 
 **To add a font:** append `['Font Name', 'Font+URL+Encoded']` to the array in `<head>`. Test that it doesn't break layout (some fonts are very wide). All fonts must load from Google Fonts.
 
+### Font Cycling Interaction
+
+Clicking the band name (`.band-name`) cycles to a new random font. The transition:
+
+1. `.band-name` fades to `opacity: 0` via `transition: opacity 0.18s ease`
+2. The Google Fonts `<link data-band-font="1">` href is updated immediately (download starts)
+3. The `load` event on the link fires when the stylesheet is parsed
+4. `document.fonts.load()` waits for the actual font bytes
+5. CSS vars `--band-font` and `--font-serif` are updated
+6. `.band-name` fades back in
+
+The result: users never see FOUT (flash of unstyled text) — the new font is ready before it becomes visible.
+
+**Implementation rules:**
+- The initial `<link>` injected in `<head>` MUST carry `data-band-font="1"`. Without it, `cycleBandFont()` can't find and reuse the element on first click, and two font stylesheets will coexist.
+- `window._fontSwapping` guards against rapid re-clicks. While true, all clicks are ignored.
+- A 2-second hard `setTimeout` ensures `.band-name` always returns even if Google Fonts is slow or down.
+- An `error` listener on the font link fires immediately if the CDN fails, restoring the text rather than waiting for the timeout.
+- `prefers-reduced-motion: reduce` disables the opacity transition; the font still swaps, just without animation.
+
 ### Typography Roles
 
 | Role | Property | Value |
@@ -188,6 +208,9 @@ The site currently has no music. The "no music out yet -Dylan" sticky note is th
 
 | Date | Change |
 |------|--------|
+| 2026-06-27 | Font cycling: click band name to swap font with fade transition |
+| 2026-06-27 | Fixed orphan stylesheet bug (initial link now carries `data-band-font`) |
+| 2026-06-27 | Simplified `cycleBandFont`: href mutation in place vs remove+recreate |
 | 2026-06 | Created press.exe EPK window (Comic Sans, lean bio) |
 | 2026-06 | Removed CSS fire animation; replaced with 10 extreme Google Fonts |
 | 2026-06 | Random font pool expanded to 23 entries |
