@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="media/Background3.webp" type="image/webp">
-  <link rel="stylesheet" href="site.css?v=10">
+  <link rel="stylesheet" href="site.css?v=11">
   <script>
     (function () {
       var fonts = [
@@ -112,30 +112,24 @@
       </p>
     </article>
 
-    <article class="lore-beat lore-wiki">
-      <p class="lore-wiki-top">From Wikipedia, the free encyclopedia (definitely)</p>
-      <div class="lore-wiki-infobox">
-        <strong>Turtle</strong>
-        animal that does not check email
+    <article class="lore-beat lore-wiki-card" id="lore-wiki-turtle">
+      <p class="lore-wiki-top">From Wikipedia, the free encyclopedia</p>
+      <div class="lore-wiki-layout">
+        <img class="lore-wiki-thumb" id="lore-turtle-thumb" src="" alt="" hidden>
+        <div class="lore-wiki-copy">
+          <h2 id="lore-turtle-title">Turtle</h2>
+          <p id="lore-turtle-extract">Loading turtle facts…</p>
+          <p class="lore-wiki-footer">
+            <a id="lore-turtle-link" href="https://en.wikipedia.org/wiki/Turtle" target="_blank" rel="noopener noreferrer">Read the full article on Wikipedia →</a>
+          </p>
+        </div>
       </div>
-      <h2>Watch for Turtles</h2>
-      <p>
-        <b>Watch for Turtles</b> may refer to a Toronto post-punk band, a Canadian road warning, or a lifestyle in which you stare at asphalt until something ancient shows up.
-      </p>
-      <p>
-        In traffic engineering, a <i>watch for turtles</i> sign advises motorists that chelonians may enter the roadway and refuse to negotiate. In music, it advises listeners that the band may enter the room and also refuse to negotiate.
-      </p>
-      <p>
-        Not to be confused with <a href="https://en.wikipedia.org/wiki/Turtle" target="_blank" rel="noopener noreferrer">Turtle</a> (the animal), <a href="https://en.wikipedia.org/wiki/Turtle_(disambiguation)" target="_blank" rel="noopener noreferrer">Turtle (disambiguation)</a>, or people who say they will “definitely be at the show” and then are not.
-      </p>
-      <p class="lore-wiki-footer">
-        Real article about the animal:
-        <a href="https://en.wikipedia.org/wiki/Turtle" target="_blank" rel="noopener noreferrer">Wikipedia — Turtle</a>
-      </p>
     </article>
 
-    <article class="lore-beat lore-sign">
+    <article class="lore-beat lore-sign-card">
+      <h2 class="lore-section-title">Watch for Turtles signs</h2>
       <img
+        class="lore-sign-img"
         src="media/watch-for-turtles-sign.jpg"
         alt="Yellow diamond road sign that says Watch for Turtles"
         width="1200"
@@ -144,8 +138,54 @@
         decoding="async"
       >
       <p class="lore-sign-caption">
-        The original branding meeting. Ontario paid for the merch.
+        Real roadside warnings used across Ontario (and beyond) so drivers slow down when turtles are crossing.
+        There isn’t a dedicated Wikipedia page for the sign — here’s the real stuff instead.
       </p>
+      <div class="lore-link-list">
+        <a class="lore-link" href="https://thinkturtle.ca/watch-4-turtles-signs" target="_blank" rel="noopener noreferrer">
+          <span class="lore-link-kicker">Think Turtle</span>
+          <span class="lore-link-title">Watch 4 Turtles signs</span>
+        </a>
+        <a class="lore-link" href="https://bancroftontario.com/turtle-crossing/turtle-crossing-signs/" target="_blank" rel="noopener noreferrer">
+          <span class="lore-link-kicker">Bancroft Ontario</span>
+          <span class="lore-link-title">Turtle crossing signs</span>
+        </a>
+        <a class="lore-link" href="https://doi.org/10.22621/cfn.v133i3.2279" target="_blank" rel="noopener noreferrer">
+          <span class="lore-link-kicker">Study</span>
+          <span class="lore-link-title">Do turtle warning signs reduce roadkill?</span>
+        </a>
+      </div>
+    </article>
+
+    <article class="lore-beat lore-more">
+      <h2 class="lore-section-title">More turtle reading</h2>
+      <p class="lore-more-lead">Actual Wikipedia pages. Go get weirdly informed.</p>
+      <div class="lore-link-grid" id="lore-more-links">
+        <a class="lore-link" data-wiki="Painted_turtle" href="https://en.wikipedia.org/wiki/Painted_turtle" target="_blank" rel="noopener noreferrer">
+          <span class="lore-link-kicker">Wikipedia</span>
+          <span class="lore-link-title">Painted turtle</span>
+        </a>
+        <a class="lore-link" data-wiki="Snapping_turtle" href="https://en.wikipedia.org/wiki/Snapping_turtle" target="_blank" rel="noopener noreferrer">
+          <span class="lore-link-kicker">Wikipedia</span>
+          <span class="lore-link-title">Snapping turtle</span>
+        </a>
+        <a class="lore-link" data-wiki="Blanding%27s_turtle" href="https://en.wikipedia.org/wiki/Blanding%27s_turtle" target="_blank" rel="noopener noreferrer">
+          <span class="lore-link-kicker">Wikipedia</span>
+          <span class="lore-link-title">Blanding’s turtle</span>
+        </a>
+        <a class="lore-link" data-wiki="Sea_turtle" href="https://en.wikipedia.org/wiki/Sea_turtle" target="_blank" rel="noopener noreferrer">
+          <span class="lore-link-kicker">Wikipedia</span>
+          <span class="lore-link-title">Sea turtle</span>
+        </a>
+        <a class="lore-link" data-wiki="Roadkill" href="https://en.wikipedia.org/wiki/Roadkill" target="_blank" rel="noopener noreferrer">
+          <span class="lore-link-kicker">Wikipedia</span>
+          <span class="lore-link-title">Roadkill</span>
+        </a>
+        <a class="lore-link" data-wiki="Wildlife_crossing" href="https://en.wikipedia.org/wiki/Wildlife_crossing" target="_blank" rel="noopener noreferrer">
+          <span class="lore-link-kicker">Wikipedia</span>
+          <span class="lore-link-title">Wildlife crossing</span>
+        </a>
+      </div>
     </article>
   </section>
 

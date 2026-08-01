@@ -490,6 +490,65 @@ function setupShowsEmbed() {
   }
 }
 
+// --- Turtle lore (Wikipedia summaries) ---------------------------------------
+
+const TURTLE_FALLBACK =
+  'Turtles are reptiles characterized by a special shell developed mainly from their ribs. There are hundreds of living species, including land tortoises, freshwater terrapins, and sea turtles.';
+
+async function fetchWikiSummary(title) {
+  const url =
+    'https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title);
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('wiki ' + res.status);
+  return res.json();
+}
+
+async function setupTurtleLoreContent() {
+  const titleEl = document.getElementById('lore-turtle-title');
+  const extractEl = document.getElementById('lore-turtle-extract');
+  const linkEl = document.getElementById('lore-turtle-link');
+  const thumbEl = document.getElementById('lore-turtle-thumb');
+  if (!extractEl) return;
+
+  try {
+    const data = await fetchWikiSummary('Turtle');
+    if (titleEl) titleEl.textContent = data.title || 'Turtle';
+    extractEl.textContent = data.extract || TURTLE_FALLBACK;
+    if (linkEl && data.content_urls?.desktop?.page) {
+      linkEl.href = data.content_urls.desktop.page;
+    }
+    if (thumbEl && data.thumbnail?.source) {
+      thumbEl.src = data.thumbnail.source;
+      thumbEl.alt = data.title || 'Turtle';
+      thumbEl.hidden = false;
+      thumbEl.addEventListener('load', () => window.ScrollTrigger?.refresh(), { once: true });
+    }
+  } catch {
+    extractEl.textContent = TURTLE_FALLBACK;
+  }
+
+  const moreLinks = document.querySelectorAll('#lore-more-links a[data-wiki]');
+  const blurbJobs = [...moreLinks].map(async (anchor) => {
+    const title = anchor.getAttribute('data-wiki');
+    if (!title) return;
+    try {
+      const data = await fetchWikiSummary(title);
+      if (data.extract) {
+        const blurb = document.createElement('span');
+        blurb.className = 'lore-link-blurb';
+        blurb.textContent =
+          data.extract.length > 120 ? data.extract.slice(0, 117) + '…' : data.extract;
+        anchor.appendChild(blurb);
+      }
+    } catch {
+      /* keep title-only card */
+    }
+  });
+
+  await Promise.all(blurbJobs);
+  window.ScrollTrigger?.refresh();
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   setupShowsEmbed();
   setupLegacyIcons();
@@ -499,4 +558,5 @@ window.addEventListener('DOMContentLoaded', () => {
   setupMailingListForm();
   setupClock();
   setupBandNameCycler();
+  setupTurtleLoreContent();
 });
