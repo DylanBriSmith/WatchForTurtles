@@ -1,0 +1,10 @@
+---
+description: Keep commit messages free of tool branding
+alwaysApply: true
+---
+
+# Commit messages
+
+Never put the word "Cursor" (or similar tool branding) in commit messages, PR titles, PR bodies, or co-authored-by trailers.
+
+Write normal project commit messages about the change itself only.
