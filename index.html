@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="media/Background3.webp" type="image/webp">
-  <link rel="stylesheet" href="site.css?v=8">
+  <link rel="stylesheet" href="site.css?v=9">
   <script>
     (function () {
       var fonts = [
@@ -196,7 +196,9 @@
   </div>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous photo">‹</button>
     <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next photo">›</button>
   </div>
 
   <div class="bottom-ticker" aria-hidden="true">

@@ -269,25 +269,64 @@ function removeTaskbarButton(windowId) {
 function setupLightbox() {
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
   if (!lightbox || !lightboxImg) return;
 
-  document.querySelectorAll('.photo-grid img').forEach((img) => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.currentSrc || img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.classList.add('open');
-    });
+  const photos = [...document.querySelectorAll('.photo-grid img')];
+  let currentIndex = 0;
+
+  function showPhoto(index) {
+    if (!photos.length) return;
+    currentIndex = (index + photos.length) % photos.length;
+    const img = photos[currentIndex];
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt;
+  }
+
+  function openLightbox(index) {
+    showPhoto(index);
+    lightbox.classList.add('open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+  }
+
+  photos.forEach((img, index) => {
+    img.addEventListener('click', () => openLightbox(index));
   });
 
-  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+  prevBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showPhoto(currentIndex - 1);
+  });
+  nextBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showPhoto(currentIndex + 1);
+  });
+
+  lightboxImg.addEventListener('click', (e) => e.stopPropagation());
+  lightbox.addEventListener('click', closeLightbox);
 
   document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-
     if (lightbox.classList.contains('open')) {
-      lightbox.classList.remove('open');
+      if (e.key === 'Escape') {
+        closeLightbox();
+        return;
+      }
+      if (e.key === 'ArrowLeft') {
+        showPhoto(currentIndex - 1);
+        return;
+      }
+      if (e.key === 'ArrowRight') {
+        showPhoto(currentIndex + 1);
+        return;
+      }
       return;
     }
+
+    if (e.key !== 'Escape') return;
 
     const openWindows = [...document.querySelectorAll('.window')].filter(
       (w) => w.style.visibility === 'visible'

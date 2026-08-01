@@ -392,8 +392,10 @@ html, body {
   width: 100%;
   height: auto;
   max-width: 100%;
+  max-height: 200px;
   object-fit: contain;
   display: block;
+  margin: 0 auto;
   cursor: pointer;
   filter: grayscale(25%);
   transition: filter 0.25s ease;
@@ -411,6 +413,7 @@ html, body {
   z-index: 9000;
   align-items: center;
   justify-content: center;
+  gap: 12px;
   cursor: pointer;
   pointer-events: none;
   opacity: 0;
@@ -422,11 +425,32 @@ html, body {
   background: rgba(0,0,0,0.92);
 }
 .lightbox-img {
-  max-width: 92vw;
+  max-width: min(84vw, 1100px);
   max-height: 88vh;
   object-fit: contain;
   border: 1px solid var(--muted);
   box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  cursor: default;
+}
+.lightbox-nav {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--primary);
+  background: rgba(0,0,0,0.55);
+  color: var(--primary);
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-nav:hover {
+  background: var(--primary);
+  color: var(--bg);
+}
+.lightbox-nav:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .contact-list {
@@ -655,9 +679,22 @@ html, body {
     grid-template-columns: 1fr;
   }
 
-  /* Bottom ticker: reduce oversized font */
+  /* Hide ticker so mailing list has room */
   .bottom-ticker {
-    font-size: 1.4rem;
+    display: none;
+  }
+  .ml-bar {
+    bottom: 24px;
+  }
+
+  .lightbox {
+    gap: 6px;
+    padding: 0 8px;
+  }
+  .lightbox-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
   }
 
 }
