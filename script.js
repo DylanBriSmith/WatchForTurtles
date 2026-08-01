@@ -490,10 +490,16 @@ function setupShowsEmbed() {
   }
 }
 
-// --- Turtle lore (Wikipedia summaries) ---------------------------------------
+// --- Turtle lore photos (from Wikipedia) -------------------------------------
 
-const TURTLE_FALLBACK =
-  'Turtles are reptiles characterized by a special shell developed mainly from their ribs. There are hundreds of living species, including land tortoises, freshwater terrapins, and sea turtles.';
+const LORE_PHOTO_TITLES = [
+  'Turtle',
+  'Painted_turtle',
+  'Snapping_turtle',
+  "Blanding's_turtle",
+  'Sea_turtle',
+  'Tortoise',
+];
 
 async function fetchWikiSummary(title) {
   const url =
@@ -504,48 +510,44 @@ async function fetchWikiSummary(title) {
 }
 
 async function setupTurtleLoreContent() {
-  const titleEl = document.getElementById('lore-turtle-title');
-  const extractEl = document.getElementById('lore-turtle-extract');
-  const linkEl = document.getElementById('lore-turtle-link');
-  const thumbEl = document.getElementById('lore-turtle-thumb');
-  if (!extractEl) return;
+  const grid = document.getElementById('lore-photos');
+  if (!grid) return;
 
-  try {
-    const data = await fetchWikiSummary('Turtle');
-    if (titleEl) titleEl.textContent = data.title || 'Turtle';
-    extractEl.textContent = data.extract || TURTLE_FALLBACK;
-    if (linkEl && data.content_urls?.desktop?.page) {
-      linkEl.href = data.content_urls.desktop.page;
-    }
-    if (thumbEl && data.thumbnail?.source) {
-      thumbEl.src = data.thumbnail.source;
-      thumbEl.alt = data.title || 'Turtle';
-      thumbEl.hidden = false;
-      thumbEl.addEventListener('load', () => window.ScrollTrigger?.refresh(), { once: true });
-    }
-  } catch {
-    extractEl.textContent = TURTLE_FALLBACK;
-  }
-
-  const moreLinks = document.querySelectorAll('#lore-more-links a[data-wiki]');
-  const blurbJobs = [...moreLinks].map(async (anchor) => {
-    const title = anchor.getAttribute('data-wiki');
-    if (!title) return;
-    try {
-      const data = await fetchWikiSummary(title);
-      if (data.extract) {
-        const blurb = document.createElement('span');
-        blurb.className = 'lore-link-blurb';
-        blurb.textContent =
-          data.extract.length > 120 ? data.extract.slice(0, 117) + '…' : data.extract;
-        anchor.appendChild(blurb);
+  const results = await Promise.all(
+    LORE_PHOTO_TITLES.map(async (title) => {
+      try {
+        return await fetchWikiSummary(title);
+      } catch {
+        return null;
       }
-    } catch {
-      /* keep title-only card */
-    }
+    })
+  );
+
+  results.forEach((data) => {
+    if (!data?.thumbnail?.source) return;
+
+    const figure = document.createElement('figure');
+    figure.className = 'lore-photo';
+
+    const img = document.createElement('img');
+    img.src = data.thumbnail.source;
+    img.alt = data.title || 'Turtle';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+
+    const caption = document.createElement('figcaption');
+    const link = document.createElement('a');
+    link.href = data.content_urls?.desktop?.page || '#';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = data.title || 'Turtle';
+    caption.appendChild(link);
+
+    figure.appendChild(img);
+    figure.appendChild(caption);
+    grid.appendChild(figure);
   });
 
-  await Promise.all(blurbJobs);
   window.ScrollTrigger?.refresh();
 }
 

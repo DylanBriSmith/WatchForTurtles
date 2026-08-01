@@ -158,132 +158,22 @@
 
   function setupTurtleLoreScroll() {
     const lore = document.getElementById('turtle-lore');
-    const beats = document.querySelectorAll('#turtle-lore .lore-beat');
-    if (!lore || !beats.length) return;
-
-    if (typeof ScrollTrigger === 'undefined') {
-      beats.forEach((beat) => {
-        beat.style.opacity = '1';
-      });
-      return;
-    }
+    if (!lore || typeof ScrollTrigger === 'undefined' || reducedMotion) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
-    if (reducedMotion) {
-      gsap.set(beats, { opacity: 1, y: 0, clearProps: 'transform' });
-      return;
-    }
-
-    // Menu / desktop chrome slides away as lore comes up
-    const chromeOut = {
-      trigger: lore,
-      start: 'top 90%',
-      end: 'top 35%',
-      scrub: 0.6,
-      onUpdate: (self) => {
-        const header = document.querySelector('.pp-header');
-        if (header) {
-          header.style.pointerEvents = self.progress > 0.55 ? 'none' : '';
-        }
-      },
-    };
-
-    gsap.to('.pp-header', {
-      y: -160,
+    gsap.from('#turtle-lore .lore-section-title, #lore-photos, .lore-wiki-links', {
       opacity: 0,
-      ease: 'none',
-      scrollTrigger: chromeOut,
-    });
-
-    gsap.to('.sticky, .scroll-hint, .ml-bar, .bottom-ticker, .corner-clock', {
-      y: 48,
-      opacity: 0,
-      ease: 'none',
+      y: 28,
+      duration: 0.6,
+      stagger: 0.12,
+      ease: ease.out,
       scrollTrigger: {
         trigger: lore,
-        start: 'top 90%',
-        end: 'top 35%',
-        scrub: 0.6,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
       },
     });
-
-    // Per-beat reveal
-    gsap.set(beats, { opacity: 0, y: 56 });
-    beats.forEach((beat) => {
-      gsap.to(beat, {
-        opacity: 1,
-        y: 0,
-        duration: 0.85,
-        ease: ease.outStrong,
-        scrollTrigger: {
-          trigger: beat,
-          start: 'top 82%',
-          toggleActions: 'play none none reverse',
-        },
-      });
-    });
-
-    // Meme chart bars grow in
-    const bars = document.querySelectorAll('.lore-meme-chart .lore-bar');
-    if (bars.length) {
-      gsap.fromTo(
-        bars,
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: ease.pop,
-          scrollTrigger: {
-            trigger: '.lore-meme-chart',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse',
-          },
-        }
-      );
-    }
-
-    // Sign image slight parallax
-    const signImg = document.querySelector('.lore-sign-img');
-    if (signImg) {
-      gsap.fromTo(
-        signImg,
-        { y: 40, scale: 0.94 },
-        {
-          y: 0,
-          scale: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.lore-sign-card',
-            start: 'top 85%',
-            end: 'top 35%',
-            scrub: true,
-          },
-        }
-      );
-    }
-
-    // More-links stagger
-    const moreLinks = document.querySelectorAll('#lore-more-links .lore-link');
-    if (moreLinks.length) {
-      gsap.fromTo(
-        moreLinks,
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.45,
-          stagger: 0.08,
-          ease: ease.out,
-          scrollTrigger: {
-            trigger: '#lore-more-links',
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
-        }
-      );
-    }
   }
 
   window.peachPitGsap = {
