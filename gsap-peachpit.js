@@ -64,6 +64,7 @@
     gsap.set('.pp-btn', { opacity: 0, y: 22 });
     gsap.set('.pp-rule', { opacity: 0, letterSpacing: '0.2em' });
     gsap.set('.sticky', { opacity: 0, scale: 0.8, transformOrigin: 'top right' });
+    gsap.set('.scroll-hint', { opacity: 0 });
     gsap.set('.ml-bar', { opacity: 0, y: 28 });
     gsap.set('.bottom-ticker', { opacity: 0, y: 20 });
     gsap.set('.corner-clock', { opacity: 0, y: 12, scale: 0.85 });
@@ -91,6 +92,7 @@
         0.52
       )
       .to('.sticky', { opacity: 1, scale: 1, duration: duration.sticky, ease: ease.pop }, 0.48)
+      .to('.scroll-hint', { opacity: 0.75, duration: 0.5 }, 0.9)
       .to('.ml-bar', { opacity: 1, y: 0, duration: duration.mlBar, ease: ease.pop }, 0.62)
       .to('.bottom-ticker', { opacity: 1, y: 0, duration: duration.ticker }, 0.68)
       .to(
@@ -152,6 +154,41 @@
         { opacity: 1, scale: 1, duration: duration.lightbox, ease: ease.pop }
       );
     }).observe(lightbox, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  function setupTurtleLoreScroll() {
+    const beats = document.querySelectorAll('#turtle-lore .lore-beat');
+    if (!beats.length) return;
+
+    if (typeof ScrollTrigger === 'undefined') {
+      beats.forEach((beat) => {
+        beat.style.opacity = '1';
+      });
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (reducedMotion) {
+      gsap.set(beats, { opacity: 1, y: 0 });
+      return;
+    }
+
+    gsap.set(beats, { opacity: 0, y: 40 });
+
+    beats.forEach((beat) => {
+      gsap.to(beat, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: ease.out,
+        scrollTrigger: {
+          trigger: beat,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+    });
   }
 
   window.peachPitGsap = {
@@ -233,5 +270,6 @@
     runPageIntro();
     setupNavButtonPress();
     setupLightboxAnimation();
+    setupTurtleLoreScroll();
   });
 })();

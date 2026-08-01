@@ -13,10 +13,18 @@
 }
 
 /* ── Base ── */
-html, body {
+html {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+}
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
   background-color: var(--bg);
   color: var(--primary);
   font-family: var(--font-serif);
@@ -596,6 +604,193 @@ html, body {
   50%, 100% { opacity: 0.25; }
 }
 
+/* ── First fold spacer (lets page scroll past the desktop) ── */
+.first-fold-spacer {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  pointer-events: none;
+}
+
+.scroll-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 110px;
+  text-align: center;
+  z-index: 18;
+  pointer-events: none;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: var(--primary);
+  text-shadow: 1px 1px 4px #000;
+  opacity: 0.75;
+  animation: scroll-hint-bob 2.4s ease-in-out infinite;
+}
+@keyframes scroll-hint-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ── Turtle lore (scroll section) ── */
+#turtle-lore {
+  position: relative;
+  z-index: 5;
+  padding: 80px 24px 160px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.lore-beat {
+  margin-bottom: 120px;
+}
+.lore-beat:last-child {
+  margin-bottom: 40px;
+}
+
+.lore-meme {
+  text-align: center;
+  user-select: text;
+}
+.lore-meme-label {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 10px;
+  background: #ff0;
+  color: #000;
+  font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.lore-meme-title {
+  font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
+  font-size: clamp(1.8rem, 6vw, 3.2rem);
+  line-height: 1.05;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000;
+  margin-bottom: 16px;
+}
+.lore-meme-caption {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  font-size: 1.05rem;
+  color: var(--primary);
+  opacity: 0.85;
+  line-height: 1.5;
+}
+.lore-meme-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 14px;
+  height: 140px;
+  margin: 28px auto 10px;
+  max-width: 280px;
+}
+.lore-bar {
+  width: 48px;
+  background: var(--accent);
+  border: 2px solid #000;
+  box-shadow: 3px 3px 0 #000;
+}
+.lore-bar--1 { height: 28%; }
+.lore-bar--2 { height: 55%; }
+.lore-bar--3 { height: 100%; background: var(--primary); }
+.lore-meme-axis {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  font-weight: normal;
+}
+
+.lore-wiki {
+  background: #f8f9fa;
+  color: #202122;
+  border: 1px solid #a2a9b1;
+  padding: 18px 20px 16px;
+  font-family: 'Linux Libertine', Georgia, Times, serif;
+  font-weight: normal;
+  user-select: text;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.45);
+}
+.lore-wiki-top {
+  font-size: 0.8rem;
+  color: #54595d;
+  margin-bottom: 8px;
+}
+.lore-wiki h2 {
+  font-family: 'Linux Libertine', Georgia, Times, serif;
+  font-size: 1.7rem;
+  font-weight: normal;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+  color: #000;
+}
+.lore-wiki p {
+  font-size: 0.98rem;
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+.lore-wiki a {
+  color: #3366cc;
+  text-decoration: none;
+}
+.lore-wiki a:hover {
+  text-decoration: underline;
+}
+.lore-wiki-infobox {
+  float: right;
+  width: 42%;
+  max-width: 180px;
+  margin: 0 0 12px 14px;
+  border: 1px solid #a2a9b1;
+  background: #f8f9fa;
+  padding: 8px;
+  font-size: 0.78rem;
+  text-align: center;
+}
+.lore-wiki-infobox strong {
+  display: block;
+  background: #eaecf0;
+  margin: -8px -8px 8px;
+  padding: 6px;
+  font-size: 0.85rem;
+}
+.lore-wiki-footer {
+  clear: both;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #a2a9b1;
+  font-size: 0.85rem;
+  color: #54595d;
+}
+
+.lore-sign {
+  text-align: center;
+  user-select: text;
+}
+.lore-sign img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: 0 auto 14px;
+  border: 2px solid var(--muted);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+}
+.lore-sign-caption {
+  font-size: 1rem;
+  font-weight: normal;
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
   html, body {
@@ -687,6 +882,17 @@ html, body {
     bottom: 24px;
   }
 
+  .scroll-hint {
+    display: none;
+  }
+
+  .lore-wiki-infobox {
+    float: none;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 14px;
+  }
+
   .lightbox {
     gap: 6px;
     padding: 0 8px;
@@ -704,6 +910,7 @@ html, body {
   .sticky { animation: none; transform: rotate(2.8deg); }
   .bottom-ticker marquee { animation: none; }
   .clock-time .clock-colon { animation: none; }
+  .scroll-hint { animation: none; }
   .bg-photo { transform: scale(1); }
   .bg-photo.is-animating { will-change: auto; }
   .band-name,
