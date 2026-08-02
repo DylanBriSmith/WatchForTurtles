@@ -172,7 +172,22 @@
     gsap.set(track, { clearProps: 'transform' });
     gsap.set('.lore-wiki-links li', { clearProps: 'opacity,transform' });
 
-    if (reducedMotion) return;
+    if (reducedMotion) {
+      document.body.classList.add('is-in-lore');
+      return;
+    }
+
+    // Hide menu / mailing list / ticker while in lore (class toggle — reliable)
+    ScrollTrigger.create({
+      id: 'lore-chrome',
+      trigger: lore,
+      start: 'top 70%',
+      end: 'bottom top',
+      onEnter: () => document.body.classList.add('is-in-lore'),
+      onEnterBack: () => document.body.classList.add('is-in-lore'),
+      onLeave: () => document.body.classList.remove('is-in-lore'),
+      onLeaveBack: () => document.body.classList.remove('is-in-lore'),
+    });
 
     // Fade the scroll hint as you leave the first screen
     const hint = document.querySelector('.scroll-hint');
@@ -213,22 +228,20 @@
       });
     }
 
-    // Wiki links batch-in as they enter
+    // Wiki links: animate in as a group (stay visible + clickable after)
     const links = gsap.utils.toArray('.lore-wiki-links li');
     if (links.length) {
-      gsap.set(links, { opacity: 0, y: 24 });
-      ScrollTrigger.batch(links, {
-        id: 'lore-links',
-        start: 'top 88%',
-        onEnter: (els) => {
-          gsap.to(els, {
-            opacity: 1,
-            y: 0,
-            stagger: 0.07,
-            duration: 0.45,
-            ease: ease.out,
-            overwrite: true,
-          });
+      gsap.from(links, {
+        opacity: 0,
+        y: 20,
+        duration: 0.45,
+        stagger: 0.06,
+        ease: ease.out,
+        scrollTrigger: {
+          id: 'lore-links',
+          trigger: '.lore-wiki-links',
+          start: 'top 90%',
+          toggleActions: 'play none none none',
         },
       });
     }

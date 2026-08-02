@@ -636,10 +636,22 @@ body {
 /* ── Turtle lore (scroll section) ── */
 #turtle-lore {
   position: relative;
-  z-index: 5;
+  z-index: 20;
   padding: 40px 24px 160px;
   max-width: none;
   margin: 0;
+}
+
+/* Hide desktop chrome while reading turtle lore */
+body.is-in-lore .pp-header,
+body.is-in-lore .sticky,
+body.is-in-lore .scroll-hint,
+body.is-in-lore .ml-bar,
+body.is-in-lore .bottom-ticker,
+body.is-in-lore .corner-clock {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.35s ease;
 }
 
 .lore-pin {
