@@ -668,6 +668,8 @@ body.is-in-lore .corner-clock {
   max-width: 720px;
   padding: 0 24px;
   text-shadow: 1px 1px 4px #000;
+  position: relative;
+  z-index: 30;
 }
 
 .lore-photos-viewport {
@@ -730,6 +732,8 @@ body.is-in-lore .corner-clock {
   display: grid;
   gap: 8px;
   user-select: text;
+  position: relative;
+  z-index: 30;
 }
 
 .lore-wiki-links a {
