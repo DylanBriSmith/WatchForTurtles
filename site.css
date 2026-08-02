@@ -637,27 +637,41 @@ body {
 #turtle-lore {
   position: relative;
   z-index: 5;
-  padding: 80px 24px 160px;
-  max-width: 720px;
-  margin: 0 auto;
+  padding: 40px 24px 160px;
+  max-width: none;
+  margin: 0;
+}
+
+.lore-pin {
+  padding: 100px 0 48px;
 }
 
 .lore-section-title {
   font-size: clamp(1.4rem, 3vw, 2rem);
   color: var(--primary);
-  margin: 0 0 18px;
+  margin: 0 auto 18px;
+  max-width: 720px;
+  padding: 0 24px;
   text-shadow: 1px 1px 4px #000;
 }
 
+.lore-photos-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding: 0 24px;
+}
+
 .lore-photos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 48px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
 }
 
 .lore-photo {
   margin: 0;
+  flex: 0 0 min(72vw, 420px);
   background: rgba(0,0,0,0.45);
   border: 1px solid var(--muted);
 }
@@ -665,13 +679,13 @@ body {
 .lore-photo img {
   display: block;
   width: 100%;
-  height: 180px;
+  height: min(42vh, 320px);
   object-fit: cover;
 }
 
 .lore-photo figcaption {
-  padding: 8px 10px;
-  font-size: 0.9rem;
+  padding: 10px 12px;
+  font-size: 0.95rem;
 }
 
 .lore-photo a {
@@ -686,8 +700,9 @@ body {
 
 .lore-wiki-links {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+  max-width: 720px;
   display: grid;
   gap: 8px;
   user-select: text;
@@ -802,8 +817,8 @@ body {
     display: none;
   }
 
-  .lore-photos {
-    grid-template-columns: 1fr;
+  .lore-photo {
+    flex-basis: min(85vw, 360px);
   }
 
   .lightbox {

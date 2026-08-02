@@ -158,25 +158,84 @@
 
   function setupTurtleLoreScroll() {
     const lore = document.getElementById('turtle-lore');
-    if (!lore || typeof ScrollTrigger === 'undefined' || reducedMotion) return;
+    const track = document.getElementById('lore-photos');
+    const pin = document.querySelector('.lore-pin');
+    if (!lore || !track || typeof ScrollTrigger === 'undefined') return;
 
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.from('#turtle-lore .lore-section-title, #lore-photos, .lore-wiki-links', {
-      opacity: 0,
-      y: 28,
-      duration: 0.6,
-      stagger: 0.12,
-      ease: ease.out,
-      scrollTrigger: {
-        trigger: lore,
-        start: 'top 80%',
-        toggleActions: 'play none none none',
-      },
+    // Clear previous lore triggers if photos reload
+    ScrollTrigger.getAll().forEach((st) => {
+      const id = String(st.vars.id || '');
+      if (id.startsWith('lore-') || st.trigger?.closest?.('#turtle-lore')) st.kill();
     });
+    gsap.set(track, { clearProps: 'transform' });
+    gsap.set('.lore-wiki-links li', { clearProps: 'opacity,transform' });
+
+    if (reducedMotion) return;
+
+    // Fade the scroll hint as you leave the first screen
+    const hint = document.querySelector('.scroll-hint');
+    if (hint) {
+      gsap.to(hint, {
+        opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          id: 'lore-hint',
+          trigger: '.first-fold-spacer',
+          start: 'center center',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    }
+
+    // Pin photos and scrub them horizontally (classic ScrollTrigger pattern)
+    const photos = gsap.utils.toArray('#lore-photos .lore-photo');
+    if (pin && photos.length > 1) {
+      gsap.to(track, {
+        x: () => {
+          const viewport = pin.querySelector('.lore-photos-viewport');
+          const viewW = viewport ? viewport.clientWidth : window.innerWidth;
+          return Math.min(0, viewW - track.scrollWidth);
+        },
+        ease: 'none',
+        scrollTrigger: {
+          id: 'lore-photos',
+          trigger: pin,
+          start: 'top top',
+          end: () => '+=' + Math.max(track.scrollWidth, window.innerHeight),
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+      });
+    }
+
+    // Wiki links batch-in as they enter
+    const links = gsap.utils.toArray('.lore-wiki-links li');
+    if (links.length) {
+      gsap.set(links, { opacity: 0, y: 24 });
+      ScrollTrigger.batch(links, {
+        id: 'lore-links',
+        start: 'top 88%',
+        onEnter: (els) => {
+          gsap.to(els, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.07,
+            duration: 0.45,
+            ease: ease.out,
+            overwrite: true,
+          });
+        },
+      });
+    }
   }
 
   window.peachPitGsap = {
+    setupTurtleLoreScroll,
     prepareOpen(win) {
       if (reducedMotion) return;
       gsap.set(win, { opacity: 0, scale: 0.91, transformOrigin: '50% 45%' });
@@ -255,6 +314,6 @@
     runPageIntro();
     setupNavButtonPress();
     setupLightboxAnimation();
-    setupTurtleLoreScroll();
+    // Turtle lore scroll is started after photos load (see script.js)
   });
 })();

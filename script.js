@@ -530,7 +530,7 @@ async function setupTurtleLoreContent() {
     figure.className = 'lore-photo';
 
     const img = document.createElement('img');
-    img.src = data.thumbnail.source;
+    img.src = data.thumbnail.source.replace(/\/\d+px-/, '/640px-');
     img.alt = data.title || 'Turtle';
     img.loading = 'lazy';
     img.decoding = 'async';
@@ -548,7 +548,11 @@ async function setupTurtleLoreContent() {
     grid.appendChild(figure);
   });
 
-  window.ScrollTrigger?.refresh();
+  // Wait a frame so layout is ready, then wire ScrollTrigger
+  requestAnimationFrame(() => {
+    window.peachPitGsap?.setupTurtleLoreScroll?.();
+    window.ScrollTrigger?.refresh();
+  });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
