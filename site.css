@@ -684,6 +684,15 @@ body.is-in-lore .corner-clock {
   will-change: transform;
 }
 
+/* ScrollTrigger pin spacer must not steal clicks from wiki links below */
+#turtle-lore .pin-spacer {
+  pointer-events: none !important;
+}
+.lore-pin,
+.lore-wiki-links {
+  pointer-events: auto;
+}
+
 .lore-photo {
   margin: 0;
   flex: 0 0 min(72vw, 420px);
