@@ -490,65 +490,10 @@ function setupShowsEmbed() {
   }
 }
 
-// --- Turtle lore photos (from Wikipedia) -------------------------------------
+// --- Turtle lore scroll setup ------------------------------------------------
 
-const LORE_PHOTO_TITLES = [
-  'Turtle',
-  'Painted_turtle',
-  'Snapping_turtle',
-  "Blanding's_turtle",
-  'Sea_turtle',
-  'Tortoise',
-];
-
-async function fetchWikiSummary(title) {
-  const url =
-    'https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title);
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('wiki ' + res.status);
-  return res.json();
-}
-
-async function setupTurtleLoreContent() {
-  const grid = document.getElementById('lore-photos');
-  if (!grid) return;
-
-  const results = await Promise.all(
-    LORE_PHOTO_TITLES.map(async (title) => {
-      try {
-        return await fetchWikiSummary(title);
-      } catch {
-        return null;
-      }
-    })
-  );
-
-  results.forEach((data) => {
-    if (!data?.thumbnail?.source) return;
-
-    const figure = document.createElement('figure');
-    figure.className = 'lore-photo';
-
-    const img = document.createElement('img');
-    img.src = data.thumbnail.source.replace(/\/\d+px-/, '/640px-');
-    img.alt = data.title || 'Turtle';
-    img.loading = 'lazy';
-    img.decoding = 'async';
-
-    const caption = document.createElement('figcaption');
-    const link = document.createElement('a');
-    link.href = data.content_urls?.desktop?.page || '#';
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.textContent = data.title || 'Turtle';
-    caption.appendChild(link);
-
-    figure.appendChild(img);
-    figure.appendChild(caption);
-    grid.appendChild(figure);
-  });
-
-  // Wait a frame so layout is ready, then wire ScrollTrigger
+function setupTurtleLoreContent() {
+  // Photos are static in index.html (media/turtles/). Just start scroll animations.
   requestAnimationFrame(() => {
     window.peachPitGsap?.setupTurtleLoreScroll?.();
     window.ScrollTrigger?.refresh();
