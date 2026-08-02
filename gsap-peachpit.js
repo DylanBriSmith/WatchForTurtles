@@ -170,7 +170,8 @@
       if (id.startsWith('lore-') || st.trigger?.closest?.('#turtle-lore')) st.kill();
     });
     gsap.set(track, { clearProps: 'transform' });
-    gsap.set('.lore-wiki-links li', { clearProps: 'opacity,transform' });
+    // ensure wiki links are never left non-interactive from old animations
+    gsap.set('.lore-wiki-links li', { clearProps: 'all' });
 
     if (reducedMotion) {
       document.body.classList.add('is-in-lore');
@@ -226,23 +227,7 @@
       });
     }
 
-    // Wiki links: animate in as a group (stay visible + clickable after)
-    const links = gsap.utils.toArray('.lore-wiki-links li');
-    if (links.length) {
-      gsap.from(links, {
-        opacity: 0,
-        y: 20,
-        duration: 0.45,
-        stagger: 0.06,
-        ease: ease.out,
-        scrollTrigger: {
-          id: 'lore-links',
-          trigger: '.lore-wiki-links',
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-        },
-      });
-    }
+    // Wiki links stay fully visible/clickable (no opacity gating)
   }
 
   window.peachPitGsap = {
