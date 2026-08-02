@@ -177,15 +177,14 @@
       return;
     }
 
-    // Hide menu / mailing list / ticker while in lore (class toggle — reliable)
+    // Hide menu once you leave the first screen; keep it hidden through all lore
     ScrollTrigger.create({
       id: 'lore-chrome',
-      trigger: lore,
-      start: 'top 70%',
-      end: 'bottom top',
+      trigger: '.first-fold-spacer',
+      start: 'bottom 75%',
+      end: 'max',
       onEnter: () => document.body.classList.add('is-in-lore'),
       onEnterBack: () => document.body.classList.add('is-in-lore'),
-      onLeave: () => document.body.classList.remove('is-in-lore'),
       onLeaveBack: () => document.body.classList.remove('is-in-lore'),
     });
 
