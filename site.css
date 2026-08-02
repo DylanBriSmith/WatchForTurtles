@@ -645,9 +645,11 @@ body {
 
 /* Hide desktop chrome while reading turtle lore */
 body.is-in-lore .pp-header,
+body.is-in-lore .pp-header *,
 body.is-in-lore .sticky,
 body.is-in-lore .scroll-hint,
 body.is-in-lore .ml-bar,
+body.is-in-lore .ml-bar *,
 body.is-in-lore .bottom-ticker,
 body.is-in-lore .corner-clock {
   opacity: 0 !important;
