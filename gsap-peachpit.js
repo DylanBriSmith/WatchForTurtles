@@ -177,16 +177,15 @@
       return;
     }
 
-    // Hide menu once you leave the first screen; keep it hidden through all lore
-    ScrollTrigger.create({
-      id: 'lore-chrome',
-      trigger: '.first-fold-spacer',
-      start: 'bottom 75%',
-      end: 'max',
-      onEnter: () => document.body.classList.add('is-in-lore'),
-      onEnterBack: () => document.body.classList.add('is-in-lore'),
-      onLeaveBack: () => document.body.classList.remove('is-in-lore'),
-    });
+    // Hide menu once you leave the first screen (plain scroll check — reliable)
+    const spacer = document.querySelector('.first-fold-spacer');
+    const updateLoreChrome = () => {
+      if (!spacer) return;
+      const pastFirstScreen = spacer.getBoundingClientRect().bottom < window.innerHeight * 0.8;
+      document.body.classList.toggle('is-in-lore', pastFirstScreen);
+    };
+    window.addEventListener('scroll', updateLoreChrome, { passive: true });
+    updateLoreChrome();
 
     // Fade the scroll hint as you leave the first screen
     const hint = document.querySelector('.scroll-hint');
